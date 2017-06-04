@@ -26,9 +26,6 @@
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link  href="css/animate.css" rel="stylesheet">
-    
-
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -42,11 +39,12 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            @include('layouts.nav_header')
+            @include('admin.layouts.nav_header')
 
-            @include('layouts.nav_top')
+            @include('admin.layouts.nav_top')
 
-            @include('layouts.sidbar')
+            @include('admin.layouts.sidbar')
+            
         </nav>
 
         <!-- Page Content -->
@@ -75,25 +73,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
-
-    <!-- Notifications -->
-    <script src="vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script type="text/javascript">
-    @if(count($errors))          
-        @foreach ($errors->all() as $error)
-        $.notify({
-            icon: 'fa  fa-exclamation-triangle',
-            message: "{{ $error }}"
-        },{
-            type: 'danger',
-            offset: {
-                x: 50,
-                y: 70
-            }
-        });
-        @endforeach
-    @endif
-    </script>
 
 </body>
 
