@@ -16,16 +16,7 @@ class IsAdminMiddleWare
      */
     public function handle($request, Closure $next)
     {
-        $isAdmin = false;
-        $rols = Auth::user()->rols->pluck('name');
-
-        foreach ($rols as $rol) {
-            if ($rol == 'admin') {
-                $isAdmin = true;
-                break;
-            }
-        }
-        if (!$isAdmin) {
+        if (!Auth::user()->isAdmin()) {
             return redirect('/home')->withErrors([
                 'message'=>'you are not an admin'
             ]);

@@ -16,6 +16,23 @@
                 <a href="{{ config('app.url') }}/home"><i class="fa fa-home fa-fw"></i> Home</a>
             </li>
             <li>
+            <a href="{{ config('app.url') }}/user/{{ Auth::user()->id }}"><i class="fa fa-user fa-fw"></i> profile</a>
+            </li>
+            @if(Auth::user()->isAdmin())
+            <li>
+                <a href="#"><i class="fa fa fa-cogs fa-fw"></i> Admin<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ config('app.url') }}/admin">insite</a>
+                    </li>
+                    <li>
+                        <a href="morris.html">Morris.js Charts</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            @endif
+            <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>

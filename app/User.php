@@ -31,4 +31,18 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Rol::class);
     }
+
+    public function isAdmin()
+    {
+        $isAdmin = false;
+        $rols = $this->rols->pluck('name');
+
+        foreach ($rols as $rol) {
+            if ($rol == 'admin') {
+                $isAdmin = true;
+                break;
+            }
+        }
+        return $isAdmin;
+    }
 }

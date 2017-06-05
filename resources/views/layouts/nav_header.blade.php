@@ -7,7 +7,7 @@
     </button>
     <a class="navbar-brand" href="{{ url('/') }}">
         <!-- the app name -->
-        {{ config('app.name') }}
+        {{ config('app.name') }} - {{ Auth::user()->name }}
     </a>
 </div>
 <!-- /.navbar-header -->
