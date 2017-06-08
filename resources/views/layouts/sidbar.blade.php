@@ -18,20 +18,27 @@
             <li>
             <a href="{{ config('app.url') }}/user/{{ Auth::user()->id }}"><i class="fa fa-user fa-fw"></i> profile</a>
             </li>
-            @if(Auth::user()->isAdmin())
             <li>
-                <a href="#"><i class="fa fa fa-cogs fa-fw"></i> Admin<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Adminstration<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="{{ config('app.url') }}/admin">insite</a>
-                    </li>
-                    <li>
-                        <a href="morris.html">Morris.js Charts</a>
+                        <a href="#">Permissions et Rols <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="{{ config('app.url') }}/permissions">Permissions</a>
+                            </li>
+                            <li>
+                                <a href="{{ config('app.url') }}/roles">Rôles</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-third-level -->
+                        <li>
+                            <a href="{{ config('app.url') }}/users">Utilisateurs</a>
+                        </li>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            @endif
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -84,19 +91,13 @@
                         <a href="#">Second Level Item</a>
                     </li>
                     <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
+                        <a href="#">Gestion des Permissions et Rols<span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                             <li>
-                                <a href="#">Third Level Item</a>
+                                <a href="#">Permissions</a>
                             </li>
                             <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
+                                <a href="#">Rôles</a>
                             </li>
                         </ul>
                         <!-- /.nav-third-level -->

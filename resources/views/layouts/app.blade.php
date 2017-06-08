@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -12,21 +12,21 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }} - @yield('title')</title>
+    <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
     
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-    <link  href="css/animate.css" rel="stylesheet">
+    <link  href="{{ asset('css/animate.css') }}" rel="stylesheet">
     
 
     <!--[if lt IE 9]>
@@ -65,35 +65,21 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="{{ asset('vendor/metisMenu/metisMenu.min.js') }}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
+    <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
 
     <!-- Notifications -->
     <script src="vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script type="text/javascript">
-    @if(count($errors))          
-        @foreach ($errors->all() as $error)
-        $.notify({
-            icon: 'fa  fa-exclamation-triangle',
-            message: "{{ $error }}"
-        },{
-            type: 'danger',
-            offset: {
-                x: 50,
-                y: 70
-            }
-        });
-        @endforeach
-    @endif
-    </script>
+    @include ('errors.list') {{-- Including error file --}}
+    @include ('layouts.message') {{-- Including message file --}}
 
 </body>
 

@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
-class IsAdminMiddleWare
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +17,12 @@ class IsAdminMiddleWare
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->isAdmin()) {
-            return redirect('/home')->withErrors([
-                'message'=>'you are not an admin'
-            ]);
+        $user = User::all()->count();
+        if (!($user == 1)) {
+            if (!Auth::user()->hasPermissionTo('edit-roles-permissions')) //If user does //not have this permission
+        {
+                abort('401');
+            }
         }
 
         return $next($request);

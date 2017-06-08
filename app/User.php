@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+    use HasRoles;
     use Notifiable;
 
     /**
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','last_name',
     ];
 
     /**
@@ -27,22 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function rols()
-    {
-        return $this->belongsToMany(Rol::class);
-    }
-
-    public function isAdmin()
-    {
-        $isAdmin = false;
-        $rols = $this->rols->pluck('name');
-
-        foreach ($rols as $rol) {
-            if ($rol == 'admin') {
-                $isAdmin = true;
-                break;
-            }
-        }
-        return $isAdmin;
+    public function setPasswordAttribute($password)
+    {   
+        $this->attributes['password'] = bcrypt($password);
     }
 }
