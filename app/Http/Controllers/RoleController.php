@@ -51,13 +51,16 @@ class RoleController extends Controller
         //Validate name and permissions field
         $this->validate($request, [
             'name'=>'required|unique:roles|max:10',
+            'display_name'=>'required|unique:roles|max:50',
             'permissions' =>'required',
             ]
         );
 
         $name = $request['name'];
+        $display_name = $request['display_name'];
         $role = new Role();
         $role->name = $name;
+        $role->display_name = $display_name;
 
         $permissions = $request['permissions'];
 

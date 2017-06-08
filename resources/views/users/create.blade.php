@@ -43,15 +43,16 @@
         </div>
 
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-              <label>
+          <label class="col-sm-2 control-label">Attacher Rôles</label>
+          <div class="col-sm-10">
+            <ul style="list-style-type: none;">
               @foreach ($roles as $role)
+                <li>
                 {{ Form::checkbox('roles[]',  $role->id ) }}
                 {{ $role->name }}
+                </li>
               @endforeach
-              </label>
-            </div>
+            </ul>
           </div>
         </div>
 

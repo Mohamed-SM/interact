@@ -20,6 +20,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            <div class="table-responsive">
               <table class="table table-bordered">
                 <tbody><tr>
                     <th>Name</th>
@@ -34,17 +35,17 @@
                     <td>{{ $user->name .' '.$user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
-                    <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
+                    <td>{{ $user->roles()->pluck('display_name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                     <td>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info">Edit</a>
-                    {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
-                    {!! Form::close() !!}
+                      <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supp-modal{{ $user->id }}"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
                 @endforeach
 
-              </tbody></table>
+                </tbody>
+              </table>
+            </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
@@ -56,5 +57,34 @@
     </section>
     <!-- /.content -->
 </div>
+<!-- Modal -->
+@foreach ($users as $user)
+<div class="modal fade modal-danger" id="supp-modal{{ $user->id }}" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirmier la supprission</h4>
+      </div>
+      <div class="modal-body">
+        <p> <b>Id : </b> {{ $user->id }}</p>
+        <p> <b>Nom : </b> {{ $user->name .' '.$user->last_name }}</p>
+        <p> <b>Email : </b> {{ $user->email }}</p>
+        <p> <b>Roles : </b> {{ $user->roles()->pluck('display_name')->implode(' ,') }}</p>
+        <p> <b>Ajoute le  : </b> {{ $user->created_at->format('F d, Y h:ia') }}</p>
+      </div>
+      <div class="modal-footer">
+      {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+      <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+      {!! Form::submit('Delete', ['class' => 'btn btn-outline']) !!}
+      {!! Form::close() !!}
+      </div>
+    </div>
+    
+  </div>
+</div>    
+@endforeach
 
 @endsection

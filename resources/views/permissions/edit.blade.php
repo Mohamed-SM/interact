@@ -5,15 +5,15 @@
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Modifer permission : {{$permission->display_name}}
-      </h1>
-    </section>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Modifer permission : {{$permission->display_name}}
+    </h1>
+  </section>
 
     <!-- Main content -->
-    <section class="content">
+  <section class="content">
     <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">information de permission</h3>
@@ -51,8 +51,8 @@
         <a href="{{ config('app.url') }}/users" class="btn btn-link">Cancel</a>
       </div>
       <!-- /.box-footer -->
-    {{ Form::close() }}
-    </div>
+      {{ Form::close() }}
+      </div>
 
   </section>
   <!-- /.content -->
