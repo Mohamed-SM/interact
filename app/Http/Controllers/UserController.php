@@ -114,6 +114,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
          $this->validate($request, [
             'name'=>'required|max:120',
+            'last_name'=>'required|max:120',
             'email'=>'required|email|unique:users,email,'.$id
         ]);
         if ($request['password'] != null) { //check if the password is updated
@@ -146,7 +147,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //Find a user with a given id and delete
-        $user = User::findOrFail($id); 
+        $user = User::findOrFail($id);
+        $user->roles()->detach();
+        $user->permissions()->detach();
         $user->delete();
 
         return redirect()->route('users.index')

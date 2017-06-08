@@ -1,5 +1,5 @@
 <script type="text/javascript">
-@if(count($errors) > 0)          
+@if(count($errors) > 0)
     @foreach ($errors->all() as $error)
     $.notify({
         icon: 'fa  fa-exclamation-triangle',
@@ -7,7 +7,7 @@
     },{
         type: 'danger',
         offset: {
-            x: 20,
+            x: 15,
             y: 70
         }
     });

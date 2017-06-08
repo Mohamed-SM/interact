@@ -148,6 +148,13 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
+
+        $p_all = Permission::all();//Get all permissions
+
+        foreach ($p_all as $p) {
+            $role->revokePermissionTo($p); //Remove all permissions associated with role
+        }
+        
         $role->delete();
 
         return redirect()->route('roles.index')

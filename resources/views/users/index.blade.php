@@ -35,10 +35,17 @@
                     <td>{{ $user->name .' '.$user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
-                    <td>{{ $user->roles()->pluck('display_name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
+                    <td>{{ $user->roles()->pluck('display_name')->implode(' ,') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                     <td>
-                      <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supp-modal{{ $user->id }}"><i class="fa fa-trash"></i></button>
+                    
+                      <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">
+                        <i class="fa fa-pencil-square-o"></i>
+                      </a>
+                      
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supp-modal{{ $user->id }}">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    
                     </td>
                 </tr>
                 @endforeach

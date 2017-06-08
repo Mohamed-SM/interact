@@ -136,10 +136,16 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
 
         //Make it impossible to delete this specific permission 
-        if ($permission->name == "Administer roles & permissions") {
+        if ($permission->name == "edit-roles-permissions") {
             return redirect()->route('permissions.index')
             ->with('flash_message',
              'Cannot delete this Permission!');
+        }
+
+        $r_all = Role::all();//Get all roles
+
+        foreach ($r_all as $r) {
+            $r->revokePermissionTo($permission); //Remove all permissions associated with role
         }
 
         $permission->delete();
