@@ -114,10 +114,16 @@ class UserController extends Controller
         $user = User::findOrFail($id);
          $this->validate($request, [
             'name'=>'required|max:120',
-            'email'=>'required|email|unique:users,email,'.$id,
-            'password'=>'required|min:6|confirmed'
+            'email'=>'required|email|unique:users,email,'.$id
         ]);
-        $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+        if ($request['password'] != null) { //check if the password is updated
+            $this->validate($request, [
+                'password'=>'required|min:6|confirmed'
+            ]);
+            $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+        }else{
+            $input = $request->only(['name', 'email']);  //Retreive only the name, email fields
+        }
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
 

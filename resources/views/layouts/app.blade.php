@@ -8,76 +8,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
-    
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="{{ asset('vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-
-    <link  href="{{ asset('css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/animate/animate.css') }}" rel="stylesheet">
     
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css') }}">
 
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-    <div id="wrapper">
+    @include('layouts.main_header')
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            @include('layouts.nav_header')
+    @include('layouts.main_sidebar')
 
-            @include('layouts.nav_top')
+    <div id="content-wrapper">
+        @yield('content')
+    </div>
 
-            @include('layouts.sidbar')
-        </nav>
+    @include('layouts.main_footer')
 
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    @yield('content')
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
+    @include('layouts.control_sidebar')
 
     </div>
     <!-- /#wrapper -->
 
     <!-- jQuery -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('vendor/metisMenu/metisMenu.min.js') }}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
-
+    <!-- AdminLTE App -->
+    <script src="{{ asset('dist/js/app.min.js') }}"></script>
     <!-- Notifications -->
-    <script src="vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var url = window.location;
+            var link = $('ul.sidebar-menu li a').filter(function() {
+                return this.href == url;
+            }).parent().addClass("active");
+            while(link.parent().hasClass("treeview-menu")){
+                link.parent().addClass("menu-open");
+                link.parent().css('display','block');
+                link = link.parent().parent();
+                link.addClass("active");
+            }
+            $(".pagination").addClass("pagination-sm no-margin");
+        });
+    </script>
+
     @include ('errors.list') {{-- Including error file --}}
     @include ('layouts.message') {{-- Including message file --}}
 

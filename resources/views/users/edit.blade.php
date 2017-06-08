@@ -3,50 +3,85 @@
 @section('title', '| Edit User')
 
 @section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Modifer Utilisateur : {{$user->name .' '. $user->last_name}}
+      </h1>
+    </section>
 
-<div class='col-lg-4 col-lg-offset-4'>
-
-    <h1><i class='fa fa-user-plus'></i> Edit {{$user->name}}</h1>
-    <hr>
-
-    {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with user data --}}
-
-    <div class="form-group">
-        {{ Form::label('name', 'Name') }}
-        {{ Form::text('name', null, array('class' => 'form-control')) }}
+    <!-- Main content -->
+    <section class="content">
+    <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">information d'utilisateur</h3>
     </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT' , 'class' => 'form-horizontal')) }}
 
-    <div class="form-group">
-        {{ Form::label('email', 'Email') }}
-        {{ Form::email('email', null, array('class' => 'form-control')) }}
-    </div>
+        <div class="box-body">
+        <div class="form-group">
+          {{ Form::label('name', 'nom' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('name', null, array('class' => 'form-control')) }}
+          </div>
+        </div>
 
-    <h5><b>Give Role</b></h5>
+        <div class="form-group">
+          {{ Form::label('last_name', 'prenom' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('last_name', null, array('class' => 'form-control')) }}
+          </div>
+        </div>
 
-    <div class='form-group'>
-        @foreach ($roles as $role)
-            {{ Form::checkbox('roles[]',  $role->id, $user->roles ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+        <div class="form-group">
+          {{ Form::label('email', 'Email' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::email('email', null, array('class' => 'form-control')) }}
+          </div>
+        </div>
 
-        @endforeach
-    </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label>
+              @foreach ($roles as $role)
+                {{ Form::checkbox('roles[]',  $role->id ) }}
+                {{ $role->name }}
+              @endforeach
+              </label>
+            </div>
+          </div>
+        </div>
+        <p class="col-sm-offset-2 text-light-blue"><em class="fa fa-info-circle"></em> Vous pouvez lessez les champs de mot de pass vide pour ne pas modifier</p>
+        <div class="form-group">
+          {{ Form::label('password', 'Mot de pass' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::password('password', array('class' => 'form-control')) }}
+          </div>
+        </div>
 
-    <div class="form-group">
-        {{ Form::label('password', 'Password') }}<br>
-        {{ Form::password('password', array('class' => 'form-control')) }}
+        <div class="form-group">
+          {{ Form::label('password', 'Confirmier' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
+          </div>
+        </div>
 
-    </div>
-
-    <div class="form-group">
-        {{ Form::label('password', 'Confirm Password') }}<br>
-        {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
-
-    </div>
-
-    {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
-
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
+        <a href="{{ config('app.url') }}/users" class="btn btn-link">Cancel</a>
+      </div>
+      <!-- /.box-footer -->
     {{ Form::close() }}
+    </div>
 
+  </section>
+  <!-- /.content -->
 </div>
 
 @endsection

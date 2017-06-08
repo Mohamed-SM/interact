@@ -6,7 +6,7 @@
     },{
         type: 'success',
         offset: {
-            x: 50,
+            x: 20,
             y: 70
         }
     });
