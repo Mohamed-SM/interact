@@ -40,10 +40,6 @@
                       data-target="#supp-modal{{ $permission->id }}">
                         <i class="fa fa-trash"></i>
                       </button>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['permissions.destroy', $permission->id] ]) !!}
-                    <a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}" class="btn btn-sm btn-info">Edit</a>
-                    {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
-                    {!! Form::close() !!}
                     </td>
                 </tr>
                 @endforeach
