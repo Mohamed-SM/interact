@@ -181,6 +181,9 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
+        //https://github.com/cmgmyr/laravel-messenger
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+
     ],
 
     /*

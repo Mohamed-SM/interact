@@ -5,8 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable {
+    use Messagable;
     use HasRoles;
     use Notifiable;
 
