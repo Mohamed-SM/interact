@@ -66,32 +66,31 @@
 </div>
 <!-- Modal -->
 @foreach ($users as $user)
-<div class="modal fade modal-danger" id="supp-modal{{ $user->id }}" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal fade modal-danger" id="supp-modal{{ $user->id }}" role="dialog">
+    <div class="modal-dialog">
   
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Confirmier la supprission</h4>
-      </div>
-      <div class="modal-body">
-        <p> <b>Id : </b> {{ $user->id }}</p>
-        <p> <b>Nom : </b> {{ $user->name .' '.$user->last_name }}</p>
-        <p> <b>Email : </b> {{ $user->email }}</p>
-        <p> <b>Roles : </b> {{ $user->roles()->pluck('display_name')->implode(' ,') }}</p>
-        <p> <b>Ajoute le  : </b> {{ $user->created_at->format('F d, Y h:ia') }}</p>
-      </div>
-      <div class="modal-footer">
-      {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-      <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
-      {!! Form::submit('Delete', ['class' => 'btn btn-outline']) !!}
-      {!! Form::close() !!}
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirmier la supprission</h4>
+        </div>
+        <div class="modal-body">
+          <p> <b>Id : </b> {{ $user->id }}</p>
+          <p> <b>Nom : </b> {{ $user->name .' '.$user->last_name }}</p>
+          <p> <b>Email : </b> {{ $user->email }}</p>
+          <p> <b>Roles : </b> {{ $user->roles()->pluck('display_name')->implode(' ,') }}</p>
+          <p> <b>Ajoute le  : </b> {{ $user->created_at->format('F d, Y h:ia') }}</p>
+        </div>
+        <div class="modal-footer">
+        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+        <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+        {!! Form::submit('Delete', ['class' => 'btn btn-outline']) !!}
+        {!! Form::close() !!}
+        </div>
       </div>
     </div>
-    
-  </div>
-</div>    
+  </div>    
 @endforeach
 
 @endsection
