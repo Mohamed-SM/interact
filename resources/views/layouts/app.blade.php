@@ -1,3 +1,4 @@
+<?php Carbon\Carbon::setLocale('fr'); ?> 
 <!DOCTYPE html>
 <html lang="fr">
 
