@@ -22,6 +22,15 @@
     <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css') }}">
 
+    <!-- jQuery -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('dist/js/app.min.js') }}"></script>
+    <!-- Notifications -->
+    <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -46,15 +55,6 @@
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/app.min.js') }}"></script>
-    <!-- Notifications -->
-    <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){

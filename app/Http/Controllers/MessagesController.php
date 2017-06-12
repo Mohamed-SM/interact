@@ -158,4 +158,28 @@ class MessagesController extends Controller
 
         return redirect('messages/' . $id);
     }
+    public function getlatestmessages()
+    {
+        $id = Input::get( 'thread' );
+        $time = Input::get( 'time' );
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+
+            return redirect('messages');
+        }
+
+        $messages = $thread->messages()->where('created_at','>',$time)->get(); 
+
+        if(count($messages)) {
+            foreach($messages as $message) {
+                $users[] = $message->user->name;
+            }
+        }
+
+        
+
+        return \Response::json($messages);   
+    }
 }

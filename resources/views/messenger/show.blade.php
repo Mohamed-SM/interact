@@ -54,13 +54,14 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" style="display: block;">
-              <form action="{{ route('messages.update', $thread->id) }}" method="post">
+              <form action="{{ route('messages.update', $thread->id) }}" method="post" id="respond">
 							  {{ method_field('put') }}
 							  {{ csrf_field() }}
                 <div class="input-group">
                   <input name="message" placeholder="Reponce ..." class="form-control" value="{{ old('message') }}" type="text">
                       <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary btn-flat">Send</button>
+                        <a id="get" class="btn btn-primary btn-flat">get</a>
                       </span>
                 </div>
               </form>
@@ -72,4 +73,20 @@
     </section>
     <!-- /.content -->
   </div>
+  <script type="text/javascript">
+    $(document).ready(function(){        
+      $("#get").click(function(){
+      	console.log("louading ...");
+        $.post("{{ route('messages.newmessages') }}",
+        {
+          "_token": $('#respond').find( 'input[name=_token]' ).val(),
+          "thread" : "{{ $thread->id }}",
+          "time" : "{{ $thread->getLatestMessageAttribute()->created_at }}",
+        },
+        function(data, status){
+          console.log(JSON.stringify(data));
+        });
+      });
+    });
+	</script>
 @endsection
