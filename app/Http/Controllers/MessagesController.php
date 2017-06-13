@@ -133,13 +133,18 @@ class MessagesController extends Controller
         $thread->activateAllParticipants();
 
         // Message
-        Message::create(
+        $message = new Message;
+        $message->thread_id = $thread->id;
+        $message->user_id   = Auth::id();
+        $message->body      = Input::get('message');
+        $message->save();
+        /*Message::create(
             [
                 'thread_id' => $thread->id,
                 'user_id'   => Auth::id(),
                 'body'      => Input::get('message'),
             ]
-        );
+        );*/
 
         // Add replier as a participant
         $participant = Participant::firstOrCreate(
@@ -156,8 +161,10 @@ class MessagesController extends Controller
             $thread->addParticipant(Input::get('recipients'));
         }
 
-        return redirect('messages/' . $id);
+        return view('messenger.partials.add_messages', compact('message'));
     }
+
+
     public function getlatestmessages()
     {
         $id = Input::get( 'thread' );
@@ -170,16 +177,24 @@ class MessagesController extends Controller
             return redirect('messages');
         }
 
-        $messages = $thread->messages()->where('created_at','>',$time)->get(); 
+        $messages = $thread->messages()->where('created_at','>',$time)->get();
 
-        if(count($messages)) {
-            foreach($messages as $message) {
-                $users[] = $message->user->name;
-            }
+        //return \Response::json($messages);
+        return view('messenger.partials.new_messages', compact('messages'));
+    }
+
+    public function getallmessages()
+    {
+        $id = Input::get( 'thread' );
+        
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            $error =  'The thread with ID: ' . $id . ' was not found.';
+
+            return view('messenger.partials.all_messages', compact('error'));
         }
 
-        
-
-        return \Response::json($messages);   
+        return view('messenger.partials.all_messages', compact('thread'));
     }
 }
