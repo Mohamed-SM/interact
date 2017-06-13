@@ -104,9 +104,7 @@
               <div class="input-group" id="input-group">
                 <input name="message" placeholder="Reponce ..." class="form-control" value="{{ old('message') }}" type="text">
                     <span class="input-group-btn">
-                    <a id="send" class="btn btn-primary btn-flat">Send</a>
-                      <button type="submit" class="btn btn-primary btn-flat">Send</button>
-                      <a id="get" class="btn btn-primary btn-flat">get</a>
+                    <button type="submit" id="send" class="btn btn-primary btn-flat">Send</button>
                     </span>
               </div>
             </form>
@@ -122,17 +120,37 @@
   	var time = "{{ $thread->getLatestMessageAttribute()->created_at }}";
 
   	function scrtolltolastmessage() {
-  		var scrollVal = $('#messages-box-hight').height();
-  		$("#messages-box").scrollTop(scrollVal);       
+  		$("#messages-box").scrollTop(100000000);  
     	console.log($("#messages-box").scrollTop());
   	}
+
 
     $(document).ready(function(){ 
     	
     	scrtolltolastmessage();
     	
 
-      
+
+      window.setInterval(function(){
+        console.log("louading evry 10s ...");
+        $.post("{{ route('messages.newmessages') }}",
+        {
+          "_token": $('#respond').find( 'input[name=_token]' ).val(),
+          "thread" : "{{ $thread->id }}",
+          "time" : time,
+        },
+        function(data, status){
+          console.log(data);
+          if (data != '') {
+            $("#messages-box").append(data);
+            scrtolltolastmessage();
+          }
+        });
+      }, 5000);
+
+
+      /*
+      //<a id="get" class="btn btn-primary btn-flat">get</a>
       $("#get").click(function(){
       	console.log("louading ...");
         $.post("{{ route('messages.newmessages') }}",
@@ -149,6 +167,8 @@
           }
         });
       });
+
+      */
 
       $("#getall").click(function(){
       	console.log("loading ...");
@@ -168,29 +188,30 @@
         $('#getall').remove();
       });
 
-      $('#send').click(function(){
-      	if($('#respond').find( 'input[name=message]' ).val() == ''){
-      		$('#input-group').addClass('has-error');
-      		console.log(" not louading ...");
-      	}
-      	else{
-      		$('#input-group').removeClass('has-error');
-	      	console.log("louading ...");
-	        $.post("{{ route('messages.update', $thread->id) }}",
-	        {
-	        	"_method" : "put",
-	          "_token"  : $('#respond').find( 'input[name=_token]' ).val(),
-	          "message" : $('#respond').find( 'input[name=message]' ).val(),
-	        },
-	        function(data, status){
-	          console.log(data);
-	          $('#respond').find( 'input[name=message]' ).val('');
-	          if (data != '') {
-	          	$("#messages-box").append(data);
-	          	scrtolltolastmessage();
-	          }
-	        });
-	      }
+      $( '#respond' ).on( 'submit', function(){
+        if($('#respond').find( 'input[name=message]' ).val() == ''){
+          $('#input-group').addClass('has-error');
+          console.log(" not louading ...");
+        }
+        else{
+          $('#input-group').removeClass('has-error');
+          console.log("louading ...");
+          $.post("{{ route('messages.update', $thread->id) }}",
+          {
+            "_method" : "put",
+            "_token"  : $('#respond').find( 'input[name=_token]' ).val(),
+            "message" : $('#respond').find( 'input[name=message]' ).val(),
+          },
+          function(data, status){
+            console.log(data);
+            $('#respond').find( 'input[name=message]' ).val('');
+            if (data != '') {
+              $("#messages-box").append(data);
+              scrtolltolastmessage();
+            }
+          });
+        }
+        return false;
       });
 
     });

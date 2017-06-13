@@ -161,6 +161,11 @@ class MessagesController extends Controller
             $thread->addParticipant(Input::get('recipients'));
         }
 
+        $userId = Auth::user()->id;
+
+        $thread->markAsRead($userId);
+
+
         return view('messenger.partials.add_messages', compact('message'));
     }
 
@@ -176,6 +181,11 @@ class MessagesController extends Controller
 
             return redirect('messages');
         }
+
+        $userId = Auth::user()->id;
+
+        $thread->markAsRead($userId);
+
 
         $messages = $thread->messages()->where('created_at','>',$time)->get();
 
@@ -194,6 +204,11 @@ class MessagesController extends Controller
 
             return view('messenger.partials.all_messages', compact('error'));
         }
+        
+        $userId = Auth::user()->id;
+
+        $thread->markAsRead($userId);
+
 
         return view('messenger.partials.all_messages', compact('thread'));
     }
