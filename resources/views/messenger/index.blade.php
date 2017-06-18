@@ -19,7 +19,8 @@
           <a href="{{ route('messages.create')  }}" class="btn btn-success btn-flat pull-right">nouvelle message</a>
           <h3 class="box-title"><i class="fa fa-envelope-o"></i> {{ Auth::user()->newThreadsCount() }} messages non lu</h3>
         </div>
-        @foreach($Threads as $thread)
+        @if(count($threads))
+        @foreach($threads as $thread)
         <?php $class = $thread->isUnread(Auth::id()) ? 'bg-gray' : ''; ?>
         <div class="box-body {{ $class }} ">
           <div class="post clearfix">
@@ -37,6 +38,9 @@
         </div>
         <!-- /.box-body -->
         @endforeach
+        @else
+        aucun messages
+        @endif
       </div>
 
 

@@ -52,6 +52,7 @@
               </ul>
             </li>
             <li><a href="{{ config('app.url') }}/users"><span>Utilisateurs</span></a></li>
+            <li><a href="{{ config('app.url') }}/facultes"><span>Facultes</span></a></li>
           </ul>
         </li>
       </ul>
