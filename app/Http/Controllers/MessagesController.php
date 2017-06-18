@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\User;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
@@ -78,8 +80,14 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function store()
+    public function store(Request $request)
     {
+
+         $this->validate($request, [
+            'subject'=>'required|max:250',
+            'message'=>'required'
+        ]);
+        
         $input = Input::all();
 
         $thread = Thread::create(

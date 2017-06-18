@@ -1,4 +1,94 @@
-@extends('layouts.master')
+@extends('layouts.app')
+
+@section('title', '| Nouvel message')
+
+@section('plugin')
+<!-- Bootstrap Multiselect -->
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap-multiselect/bootstrap-multiselect.css') }}">    
+<script src="{{ asset('vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
+@endsection
+
+@section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Nouvel message
+      </h1>
+    </section>
+
+    <!-- Main content -->
+  <section class="content">
+    <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">information de permission</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    {{ Form::open(array('url' => route('messages.store') , 'class' => 'form-horizontal')) }}
+
+        <div class="box-body">
+        <div class="form-group">
+          {{ Form::label('subject', 'Sujet' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('subject', '', array('class' => 'form-control')) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="col-sm-2 control-label">paerticipants</label>
+          <div class="col-sm-10">
+                  <select id="recipients" name="recipients[]" multiple="multiple">
+                    @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name.' '.$user->last_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+          {{ Form::label('message', 'Message' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('message', '', array('class' => 'form-control')) }}
+          </div>
+        </div>
+        
+
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
+        <a href="{{ config('app.url') }}/messages" class="btn btn-link">Cancel</a>
+      </div>
+        
+      <!-- /.box-footer -->
+      {{ Form::close() }}
+      </div>
+
+  </section>
+  <!-- /.content -->
+  </div>
+
+
+    <script type="text/javascript">
+         $(document).ready(function() {
+            $('#recipients').multiselect({
+                checkboxName: function(option) {
+                  return 'recipients[]';
+                },
+                nonSelectedText: 'Selectioner les paerticipants',
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Search for something...',
+                numberDisplayed: 5,
+                maxHeight: 200,
+                buttonClass: 'btn btn-default btn-block btn-flat',
+            });
+        });
+    </script>
+
+
+@endsection
 
 @section('content')
     <h1>Create a new message</h1>
