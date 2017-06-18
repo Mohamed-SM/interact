@@ -48,7 +48,7 @@
       <!-- /.box-body -->
       <div class="box-footer">
         {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
-        <a href="{{ config('app.url') }}/users" class="btn btn-link">Cancel</a>
+        <a href="{{ config('app.url') }}/permissions" class="btn btn-link">Cancel</a>
       </div>
       <!-- /.box-footer -->
       {{ Form::close() }}
