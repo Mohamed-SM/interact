@@ -27,6 +27,8 @@ Route::resource('permissions', 'PermissionController');
 
 Route::resource('facultes', 'FacultesController');
 
+Route::resource('departements', 'DepartementsController');
+
 
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);

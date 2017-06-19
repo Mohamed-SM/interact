@@ -9,4 +9,9 @@ class Faculte extends Model
     protected $fillable = [
         'title', 'abreviation',
     ];
+
+    public function departements()
+    {
+        return $this->hasMany(Departement::class);
+    }
 }

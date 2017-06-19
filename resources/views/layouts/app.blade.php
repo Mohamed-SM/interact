@@ -62,7 +62,7 @@
         $(document).ready(function(){
             var url = window.location;
             var link = $('ul.sidebar-menu li a').filter(function() {
-                return this.href == url;
+                return this.href == url.href.split('?')[0];
             }).parent().addClass("active");
             while(link.parent().hasClass("treeview-menu")){
                 link.parent().addClass("menu-open");
