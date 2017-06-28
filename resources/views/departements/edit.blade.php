@@ -36,14 +36,14 @@
             {{ Form::text('abreviation', null, array('class' => 'form-control' , 'placeholder' => 'FSE')) }}
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-          {{ Form::label('faculte_id', 'Faculte' , array('class' => 'col-sm-2 control-label')) }}
-          <div class="col-sm-10">
-            {{ Form::select('faculte_id', $facultes, null, ['placeholder' => 'Faculte ...' , 'class' => 'form-control']) }}
-          </div>
+        <div class="form-group">
+            {{ Form::label('faculte_id', 'Faculte' , array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::select('faculte_id', $facultes, null, ['placeholder' => 'Faculte ...' , 'class' => 'form-control']) }}
+            </div>
         </div>
+      </div>
       <!-- /.box-body -->
       <div class="box-footer">
         {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}

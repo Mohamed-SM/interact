@@ -29,6 +29,10 @@ Route::resource('facultes', 'FacultesController');
 
 Route::resource('departements', 'DepartementsController');
 
+Route::resource('domains', 'DomainsController');
+
+Route::resource('filiers', 'FiliersController');
+
 
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);

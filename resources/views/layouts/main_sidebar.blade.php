@@ -54,6 +54,8 @@
             <li><a href="{{ config('app.url') }}/users"><span>Utilisateurs</span></a></li>
             <li><a href="{{ config('app.url') }}/facultes"><span>Facultes</span></a></li>
             <li><a href="{{ config('app.url') }}/departements"><span>Departement</span></a></li>
+            <li><a href="{{ config('app.url') }}/domains"><span>Domains</span></a></li>
+            <li><a href="{{ config('app.url') }}/filiers"><span>Filiers</span></a></li>
           </ul>
         </li>
       </ul>
