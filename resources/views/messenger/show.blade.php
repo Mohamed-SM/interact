@@ -119,17 +119,22 @@
   <script type="text/javascript">
   	var time = "{{ $thread->getLatestMessageAttribute()->created_at }}";
 
+    // thisfunction is to scrolle down when the messages are loaded to see the last messages
+    //TODO *** change the scrol value and make  calculable
   	function scrtolltolastmessage() {
   		$("#messages-box").scrollTop(100000000);  
     	console.log($("#messages-box").scrollTop());
   	}
 
-
+    //this is to get new messages if ther is any new messages
+    /*TODO **
+        need more working on and study the get time to make it optimal
+        or if possible make the server send the messages automaticly
+        with out request that's the best solution
+        need to work on it whene don
+    */
     $(document).ready(function(){ 
-    	
-    	scrtolltolastmessage();
-    	
-
+      scrtolltolastmessage();
 
       window.setInterval(function(){
         console.log("louading evry 10s ...");
@@ -169,7 +174,8 @@
       });
 
       */
-
+        // to get all the messages if the user ask for it
+        // TODO **** change get all to get more
       $("#getall").click(function(){
       	console.log("loading ...");
       	$('#loading').prepend('<div class="overlay" id="don-loading"><i class="fa fa-circle-o-notch fa-spin"></i></div>')
@@ -188,6 +194,7 @@
         $('#getall').remove();
       });
 
+        //send the respande back
       $( '#respond' ).on( 'submit', function(){
         if($('#respond').find( 'input[name=message]' ).val() == ''){
           $('#input-group').addClass('has-error');
