@@ -14,4 +14,8 @@ class Filier extends Model
     {
         return $this->belongsTo(Domain::class);
     }
+
+    public function spesialite(){
+        return $this->hasMany(Spesialite::class);
+    }
 }

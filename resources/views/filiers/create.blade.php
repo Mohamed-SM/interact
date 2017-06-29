@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group">
-          {{ Form::label('domain', 'Faculte' , array('class' => 'col-sm-2 control-label')) }}
+          {{ Form::label('domain', 'Domaine' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
             {{ Form::select('domain', $domains, null, ['placeholder' => 'Domains ...' , 'class' => 'form-control']) }}
           </div>
