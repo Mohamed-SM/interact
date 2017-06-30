@@ -60,9 +60,11 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            var url = window.location;
+            var url = window.location.href.split('?')[0];
+            var addr = url.split('/');
+            var activeUrl = addr[0]+'//'+addr[2]+'/'+addr[3];
             var link = $('ul.sidebar-menu li a').filter(function() {
-                return this.href == url;
+                return this.href == activeUrl;
             }).parent().addClass("active");
             while(link.parent().hasClass("treeview-menu")){
                 link.parent().addClass("menu-open");

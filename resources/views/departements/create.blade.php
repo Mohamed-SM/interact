@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '| Ajoute Faculte')
+@section('title', '| Ajoute Departement')
 
 @section('content')
 
@@ -8,7 +8,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Ajoute Facultes:
+      Ajoute Departement:
     </h1>
   </section>
 
@@ -16,15 +16,15 @@
   <section class="content">
     <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">information de faculte</h3>
+      <h3 class="box-title">information de departement</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    {{ Form::open(array('url' => 'facultes' , 'class' => 'form-horizontal')) }}
+    {{ Form::open(array('url' => 'departements' , 'class' => 'form-horizontal')) }}
 
         <div class="box-body">
         <div class="form-group">
-          {{ Form::label('title', 'Nom de faculte' , array('class' => 'col-sm-2 control-label')) }}
+          {{ Form::label('title', 'Nom de departement' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
             {{ Form::text('title', '', array('class' => 'form-control' , 'placeholder' => 'Faculte des Sciences Exact')) }}
           </div>
@@ -37,11 +37,18 @@
           </div>
         </div>
 
+        <div class="form-group">
+          {{ Form::label('faculte_id', 'Faculte' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::select('faculte_id', $facultes, null, ['placeholder' => 'Faculte ...' , 'class' => 'form-control']) }}
+          </div>
+        </div>
+
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
         {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
-        <a href="{{ config('app.url') }}/facultes" class="btn btn-link">Cancel</a>
+        <a href="{{ config('app.url') }}/departements" class="btn btn-link">Cancel</a>
       </div>
         
       <!-- /.box-footer -->

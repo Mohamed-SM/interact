@@ -16,6 +16,14 @@
   <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('vendor/iCheck/square/blue.css') }}">
+
+  <!-- jQuery 2.2.3 -->
+  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+  <!-- iCheck -->
+  <script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
+
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -86,12 +94,7 @@
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery 2.2.3 -->
-<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
+
 <script>
   $(function () {
     $('input').iCheck({

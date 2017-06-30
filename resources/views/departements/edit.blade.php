@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '| Edit Faculte')
+@section('title', '| Edit Role')
 
 @section('content')
 
@@ -8,7 +8,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Modifer Faculte: {{$faculte->name}}
+      Modifer : {{$departement->title}}
     </h1>
   </section>
 
@@ -16,15 +16,15 @@
   <section class="content">
     <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">information de permission</h3>
+      <h3 class="box-title">information de Departement</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    {{ Form::model($faculte, array('route' => array('facultes.update', $faculte->id), 'method' => 'PUT' , 'class' => 'form-horizontal')) }}
+    {{ Form::model($departement, array('route' => array('departements.update', $departement->id), 'method' => 'PUT' , 'class' => 'form-horizontal')) }}
 
         <div class="box-body">
         <div class="form-group">
-          {{ Form::label('title', 'Nom de faculte' , array('class' => 'col-sm-2 control-label')) }}
+          {{ Form::label('title', 'Nom de departement' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
             {{ Form::text('title', null, array('class' => 'form-control' , 'placeholder' => 'Faculte des Sciences Exact')) }}
           </div>
@@ -36,11 +36,18 @@
             {{ Form::text('abreviation', null, array('class' => 'form-control' , 'placeholder' => 'FSE')) }}
           </div>
         </div>
+
+        <div class="form-group">
+            {{ Form::label('faculte_id', 'Faculte' , array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+                {{ Form::select('faculte_id', $facultes, null, ['placeholder' => 'Faculte ...' , 'class' => 'form-control']) }}
+            </div>
+        </div>
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
         {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
-        <a href="{{ config('app.url') }}/facultes" class="btn btn-link">Cancel</a>
+        <a href="{{ config('app.url') }}/departements" class="btn btn-link">Cancel</a>
       </div>
         
       <!-- /.box-footer -->

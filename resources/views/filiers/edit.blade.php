@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '| Ajoute Faculte')
+@section('name', '| Edit Filier')
 
 @section('content')
 
@@ -8,7 +8,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Ajoute Facultes:
+      Modifer : {{$filier->name}}
     </h1>
   </section>
 
@@ -16,32 +16,33 @@
   <section class="content">
     <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">information de faculte</h3>
+      <h3 class="box-name">information de filier</h3>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    {{ Form::open(array('url' => 'facultes' , 'class' => 'form-horizontal')) }}
+    {{ Form::model($filier, array('route' => array('filiers.update', $filier->id), 'method' => 'PUT' , 'class' => 'form-horizontal')) }}
 
         <div class="box-body">
         <div class="form-group">
-          {{ Form::label('title', 'Nom de faculte' , array('class' => 'col-sm-2 control-label')) }}
+          {{ Form::label('name', 'Nom de filier' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
-            {{ Form::text('title', '', array('class' => 'form-control' , 'placeholder' => 'Faculte des Sciences Exact')) }}
+            {{ Form::text('name', null, array('class' => 'form-control' , 'placeholder' => 'Faculte des Sciences Exact')) }}
           </div>
         </div>
 
         <div class="form-group">
-          {{ Form::label('abreviation', 'Abriviation' , array('class' => 'col-sm-2 control-label')) }}
+          {{ Form::label('domain', 'Domain' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
-            {{ Form::text('abreviation', '', array('class' => 'form-control' , 'placeholder' => 'FSE')) }}
+            {{ Form::select('domain', $domains, null, ['placeholder' => 'Domain ...' , 'class' => 'form-control']) }}
           </div>
         </div>
-
       </div>
+
+      
       <!-- /.box-body -->
       <div class="box-footer">
         {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
-        <a href="{{ config('app.url') }}/facultes" class="btn btn-link">Cancel</a>
+        <a href="{{ config('app.url') }}/filiers" class="btn btn-link">Cancel</a>
       </div>
         
       <!-- /.box-footer -->
