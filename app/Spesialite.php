@@ -14,4 +14,9 @@ class Spesialite extends Model
     {
         return $this->belongsTo(Filier::class);
     }
+
+    public function accadimicyear()
+    {
+        return $this->hasMany(AccadimicYear::class);
+    }
 }

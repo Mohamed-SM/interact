@@ -35,11 +35,7 @@ Route::resource('filiers', 'FiliersController');
 
 Route::resource('spesialites', 'SpesialiteController');
 
-
-Route::group(['prefix' => 'spesialites'], function () {
-    Route::post('/getfiliers', ['as' => 'getfiliers', 'uses' => 'SpesialiteController@Filiers']);
-});
-
+Route::resource('annee_acc', 'AccadimicYearController');
 
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
@@ -50,3 +46,13 @@ Route::group(['prefix' => 'messages'], function () {
     Route::post('/newmessages', ['as' => 'messages.newmessages', 'uses' => 'MessagesController@getlatestmessages']);
     Route::post('/allmessages', ['as' => 'messages.allmessages', 'uses' => 'MessagesController@getallmessages']);
 });
+
+Route::group(['prefix' => 'domains'], function () {
+    Route::post('/getfiliers', ['as' => 'getfiliers', 'uses' => 'DomainsController@getFiliers']);
+});
+
+Route::group(['prefix' => 'filiers'], function () {
+    Route::post('/getspesialite', ['as' => 'getspesialite', 'uses' => 'FiliersController@getSpesialite']);
+});
+
+

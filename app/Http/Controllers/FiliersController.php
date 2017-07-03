@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filier;
 use App\Domain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class FiliersController extends Controller
 {
@@ -130,5 +131,19 @@ class FiliersController extends Controller
         return redirect()->route('filiers.index')
             ->with('flash_message','filier supprimer!');
 
+    }
+
+    public function getSpesialite(){
+        $id = Input::get( 'filier' );
+
+        try {
+            $filier = Filier::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The Domain with ID: ' . $id . ' was not found.');
+            return;
+        }
+
+        $spesialites = $filier->spesialite;
+        return view('filiers.partials.spesialites', compact('spesialites'));
     }
 }

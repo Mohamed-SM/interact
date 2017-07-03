@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Spesialite;
-use App\Filier;
+use App\AccadimicYear;
+use App\Departement;
 use App\Domain;
+use App\Filier;
+use App\Spesialite;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
-class SpesialiteController extends Controller
+class AccadimicYearController extends Controller
 {
     public function __construct() {
         $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
@@ -20,8 +21,8 @@ class SpesialiteController extends Controller
      */
     public function index()
     {
-        $spesialites = Spesialite::paginate(15);
-        return view('spesialites.index',compact('spesialites'));
+        $acc_years = AccadimicYear::paginate(15);
+        return view('year_acc.index',compact('acc_years'));
     }
 
     /**
@@ -32,10 +33,23 @@ class SpesialiteController extends Controller
     public function create()
     {
         $domains = Domain::all()->pluck('name','id');
-        return view('spesialites.create',compact('domains'));
+        $departements = Departement::all()->pluck('title','id');
+        return view('year_acc.create',compact('domains','departements'));
     }
 
-    
+    public function Filiers(){
+        $id = Input::get( 'domain' );
+        $domain = null;
+        try {
+            $domain = Domain::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The Domain with ID: ' . $id . ' was not found.');
+            return;
+        }
+
+        $filiers = $domain->filier;
+        return view('year_acc.partials.filiers', compact('filiers'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -61,7 +75,7 @@ class SpesialiteController extends Controller
         $filier->spesialite()->save($spesialite);
 
 
-        return redirect()->route('spesialites.index')
+        return redirect()->route('year_acc.index')
             ->with('flash_message','Spesialite '. $spesialite->name.' Ajoute!');
     }
 
@@ -85,7 +99,7 @@ class SpesialiteController extends Controller
     public function edit(Spesialite $spesialite)
     {
         $domains = Domain::all()->pluck('name','id');
-        return view('spesialites.edit', compact('spesialite','domains'));
+        return view('year_acc.edit', compact('spesialite','domains'));
     }
 
     /**
@@ -108,7 +122,7 @@ class SpesialiteController extends Controller
 
         $spesialite->fill($input)->save();
 
-        return redirect()->route('spesialites.index')
+        return redirect()->route('year_acc.index')
             ->with('flash_message',
                 'filier '. $spesialite->name.' updated!');
     }
@@ -122,7 +136,7 @@ class SpesialiteController extends Controller
     public function destroy(Spesialite $spesialite)
     {
         $spesialite->delete();
-        return redirect()->route('spesialites.index')
+        return redirect()->route('year_acc.index')
             ->with('flash_message','spesialite supprimer!');
     }
 }

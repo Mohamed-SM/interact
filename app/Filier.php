@@ -18,4 +18,9 @@ class Filier extends Model
     public function spesialite(){
         return $this->hasMany(Spesialite::class);
     }
+
+    public function accadimicyear()
+    {
+        return $this->hasMany(AccadimicYear::class);
+    }
 }

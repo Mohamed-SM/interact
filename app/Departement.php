@@ -14,4 +14,9 @@ class Departement extends Model
     {
     	return $this->belongsTo(Faculte::class);
     }
+    
+    public function accadimicyear()
+    {
+        return $this->hasMany(AccadimicYear::class);
+    }
 }

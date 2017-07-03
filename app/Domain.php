@@ -17,4 +17,9 @@ class Domain extends Model
     public function addFilier(Filier $filier){
         $this->filier()->save($filier);
     }
+
+    public function accadimicyear()
+    {
+        return $this->hasMany(AccadimicYear::class);
+    }
 }

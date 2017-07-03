@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Domain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class DomainsController extends Controller
 {
@@ -133,5 +134,19 @@ class DomainsController extends Controller
         return redirect()->route('domains.index')
             ->with('flash_message','domain supprimer!');
 
+    }
+
+    public function getFiliers(){
+        $id = Input::get( 'domain' );
+        
+        try {
+            $domain = Domain::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The Domain with ID: ' . $id . ' was not found.');
+            return;
+        }
+
+        $filiers = $domain->filier;
+        return view('domains.partials.filiers', compact('filiers'));
     }
 }
