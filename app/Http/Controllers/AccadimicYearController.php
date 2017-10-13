@@ -59,24 +59,27 @@ class AccadimicYearController extends Controller
      */
     public function store(Request $request)
     {
+
         //Validate name and permissions field
         $this->validate($request, [
-                'name'=>'required|max:250',
-                'filier'=>'required',
+                'year' => 'required|int',
+                'grade' => 'required',
+                'domain_id' => 'required',
+                'filier_id' => 'required',
+                'spesialite_id' => 'required',
+                'departement_id' => 'required',
+                'study_year' => 'required',
             ]
         );
 
-        $name = $request['name'];
+        $acc_year = new AccadimicYear();
 
-        $spesialite = new Spesialite();
-        $spesialite->name = $name;
+        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id' , 'study_year']);
 
-        $filier = Filier::findOrFail($request['filier']);
-        $filier->spesialite()->save($spesialite);
+        $acc_year->fill($input)->save();
 
-
-        return redirect()->route('year_acc.index')
-            ->with('flash_message','Spesialite '. $spesialite->name.' Ajoute!');
+        return redirect()->route('annee_acc.index')
+            ->with('flash_message','Année '. $acc_year->year.$acc_year->domaine().$acc_year->grade.' Ajoute!');
     }
 
     /**

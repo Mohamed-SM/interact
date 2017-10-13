@@ -85,7 +85,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return redirect('users');
+        $user = User::findOrFail($id); //Get user with specified id
+        $roles = Role::get(); //Get all roles
+
+        return view('users.show', compact('user', 'roles')); //pass user and roles data to view
     }
 
     /**

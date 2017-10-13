@@ -33,17 +33,30 @@
                 
                 @foreach ($acc_years as $acc_year)
                 <tr>
-                    <td>{{ $acc_year->year.$acc_year->grade }}</td>
+                    <td>
+                        @if($acc_year->year > 1)
+                            {{ $acc_year->year }} eme
+                        @else
+                            {{ $acc_year->year }} er
+                        @endif
+                        année
+                        @if($acc_year->grade == 'L')
+                            Lisance
+                        @else
+                            Master
+                        @endif
+
+                    </td>
                     <td>{{ $acc_year->study_year."/".($acc_year->study_year+1) }}</td>
                     <td>{{ $acc_year->domain->name }}</td>
                     <td>{{ $acc_year->filier->name }}</td>
                     <td>{{ $acc_year->spesialite->name }}</td>
-                    <td>{{ $acc_year->departement->name }}</td>
+                    <td>{{ $acc_year->departement->title }}</td>
                     <td>
                       <a href="{{ URL::to('annee_acc/'.$acc_year->id.'/edit') }}" class="btn btn-info">
                         <i class="fa fa-pencil-square-o"></i>
                       </a>
-                      
+
                       <button type="button" class="btn btn-danger" data-toggle="modal"
                       data-target="#supp-modal{{ $acc_year->id }}">
                         <i class="fa fa-trash"></i>

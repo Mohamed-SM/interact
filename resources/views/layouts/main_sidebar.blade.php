@@ -31,7 +31,7 @@
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <li><a href="{{ config('app.url') }}/home"><i class="fa fa-home fa-fw"></i><span>Home</span></a></li>
-        <li><a href="{{ config('app.url') }}/user/{{ Auth::user()->id }}"><i class="fa fa-user-circle fa-fw"></i><span>Profile</span></a></li>
+        <li><a href="{{ config('app.url') }}/users/{{ Auth::user()->id }}"><i class="fa fa-user-circle fa-fw"></i><span>Profile</span></a></li>
         <li><a href="{{ config('app.url') }}/messages"><i class="fa fa-envelope fa-fw"></i><span>Messages</span></a></li>        
         <li class="treeview">
           <a href="#"><i class="fa fa-sitemap fa-fw"></i><span>Adminstration</span>
@@ -57,6 +57,7 @@
             <li><a href="{{ config('app.url') }}/domains"><span>Domains</span></a></li>
             <li><a href="{{ config('app.url') }}/filiers"><span>Filiers</span></a></li>
             <li><a href="{{ config('app.url') }}/spesialites"><span>Spesialites</span></a></li>
+            <li><a href="{{ config('app.url') }}/annee_acc"><span>Accadimique year</span></a></li>
           </ul>
         </li>
       </ul>

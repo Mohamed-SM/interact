@@ -95,17 +95,18 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="{{ asset('dist/img/avatar04.png') }}" class="user-image" alt="User Image">
+              <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="{{ asset('dist/img/avatar04.png') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  {{ Auth::user()->name." ".Auth::user()->last_name }}<br>
+                  3 eme année informatique
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -127,7 +128,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ config('app.url') }}/users/{{ Auth::user()->id }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat"

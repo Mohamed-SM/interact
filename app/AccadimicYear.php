@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class AccadimicYear extends Model
 {
     protected $fillable = [
-        'year','grade','study_year','domaine_id','filier_id', 'spesialite_id','deparemnet_id',
+        'year','grade','study_year','domain_id','filier_id', 'spesialite_id','departement_id',
     ];
 
-    public function domaine()
+    public function domain()
     {
         return $this->belongsTo(Domain::class);
     }
@@ -25,7 +25,7 @@ class AccadimicYear extends Model
         return $this->belongsTo(Spesialite::class);
     }
 
-    public function deparemnet()
+    public function departement()
     {
         return $this->belongsTo(Departement::class);
     }
