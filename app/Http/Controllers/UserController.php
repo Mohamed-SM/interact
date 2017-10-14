@@ -124,9 +124,9 @@ class UserController extends Controller
             $this->validate($request, [
                 'password'=>'required|min:6|confirmed'
             ]);
-            $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+            $input = $request->only(['name','last_name' ,'email', 'password']); //Retreive the name, email and password fields
         }else{
-            $input = $request->only(['name', 'email']);  //Retreive only the name, email fields
+            $input = $request->only(['name','last_name', 'email']);  //Retreive only the name, email fields
         }
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
@@ -137,8 +137,7 @@ class UserController extends Controller
         else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
-        return redirect()->route('users.index')
-            ->with('flash_message','User successfully edited.');
+        return redirect()->back()->with('flash_message','User successfully edited.');
     }
 
     /**

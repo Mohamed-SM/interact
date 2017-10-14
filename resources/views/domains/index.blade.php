@@ -29,7 +29,12 @@
                 
                 @foreach ($domains as $domain)
                 <tr>
-                    <td>{{ $domain->name }}</td>
+                    <td>
+                      {{ $domain->name }}
+                      @if($domain->common)
+                      (tronc commun)
+                      @endif
+                    </td>
                     <td>{{ $domain->code }}</td>
                     <td>
                       <a href="{{ URL::to('domains/'.$domain->id.'/edit') }}" class="btn btn-info">

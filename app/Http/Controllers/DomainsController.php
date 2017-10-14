@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Domain;
+use App\Filier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -58,6 +59,13 @@ class DomainsController extends Controller
         $code = $request['code'];
         
         $domain = new Domain();
+        
+        if (isset($request['common'])) {
+            $domain->common=1;
+        }else{
+            $domain->common=0;
+        }
+
         $domain->name = $name;
         $domain->code = $code;
 
@@ -110,6 +118,12 @@ class DomainsController extends Controller
         );
 
         $input = $request->only(['name', 'code']); //Retreive the name and the abr fields
+        
+        if (isset($request['common'])) {
+            $domain->common=1;
+        }else{
+            $domain->common=0;
+        }
 
         $domain->fill($input)->save();
 
@@ -141,12 +155,20 @@ class DomainsController extends Controller
         
         try {
             $domain = Domain::findOrFail($id);
+            if($domain->common){
+                
+                $filier = new Filier();
+                $filier->name = "Tranc commun";
+                $filier->id = "0";
+                $domain->filier->prepend($filier);
+            }
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The Domain with ID: ' . $id . ' was not found.');
             return;
         }
 
         $filiers = $domain->filier;
+
         return view('domains.partials.filiers', compact('filiers'));
     }
 }

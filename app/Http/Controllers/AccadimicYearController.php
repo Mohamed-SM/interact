@@ -37,18 +37,25 @@ class AccadimicYearController extends Controller
         return view('year_acc.create',compact('domains','departements'));
     }
 
-    public function Filiers(){
+    public function getFiliers(){
         $id = Input::get( 'domain' );
-        $domain = null;
+        
         try {
             $domain = Domain::findOrFail($id);
+            if($domain->common){
+                
+                $filier = new Filier();
+                $filier->name = "Tranc commun";
+                $domain->filier->prepend($filier);
+            }
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The Domain with ID: ' . $id . ' was not found.');
             return;
         }
 
         $filiers = $domain->filier;
-        return view('year_acc.partials.filiers', compact('filiers'));
+
+        return view('domains.partials.filiers', compact('filiers'));
     }
 
     /**
@@ -66,18 +73,16 @@ class AccadimicYearController extends Controller
                 'grade' => 'required',
                 'domain_id' => 'required',
                 'filier_id' => 'required',
-                'spesialite_id' => 'required',
                 'departement_id' => 'required',
                 'study_year' => 'required',
-            ]
-        );
+                'spesialite_id' => 'required',
+            ]);
+        
+        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id' , 'study_year']);
 
         $acc_year = new AccadimicYear();
 
-        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id' , 'study_year']);
-
         $acc_year->fill($input)->save();
-
         return redirect()->route('annee_acc.index')
             ->with('flash_message','Année '. $acc_year->year.$acc_year->domaine().$acc_year->grade.' Ajoute!');
     }
@@ -88,9 +93,9 @@ class AccadimicYearController extends Controller
      * @param  \App\Spesialite  $spesialite
      * @return \Illuminate\Http\Response
      */
-    public function show(Spesialite $spesialite)
+    public function show(AccadimicYear $acc_year)
     {
-        return redirect('spesialites');
+        return redirect('annee_acc');
     }
 
     /**
@@ -99,10 +104,17 @@ class AccadimicYearController extends Controller
      * @param  \App\Spesialite  $spesialite
      * @return \Illuminate\Http\Response
      */
-    public function edit(Spesialite $spesialite)
+    public function edit($id)
     {
+        $acc_year = AccadimicYear::findOrFail($id);
         $domains = Domain::all()->pluck('name','id');
-        return view('year_acc.edit', compact('spesialite','domains'));
+        $filiers = $acc_year->domain->filier->pluck('name','id');
+        $spesialites = $acc_year->filier->spesialite;
+        $spesialite = Spesialite::all()->first();
+        $spesialites->prepend($spesialite);
+        $spesialites = $spesialites->pluck('name','id');  
+        $departements = Departement::all()->pluck('title','id');
+        return view('year_acc.edit', compact('acc_year','domains','departements','filiers','spesialites'));
     }
 
     /**
@@ -112,22 +124,27 @@ class AccadimicYearController extends Controller
      * @param  \App\Spesialite  $spesialite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Spesialite $spesialite)
+    public function update(Request $request, $id)
     {
+        $acc_year = AccadimicYear::findOrFail($id);
         //Validate name and permissions field
         $this->validate($request, [
-                'name'=>'required|max:250',
-                'filier_id'=>'required',
-            ]
-        );
+                'year' => 'required|int',
+                'grade' => 'required',
+                'domain_id' => 'required',
+                'filier_id' => 'required',
+                'departement_id' => 'required',
+                'study_year' => 'required',
+                'spesialite_id' => 'required',
+            ]);
+        
+        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id' , 'study_year']);
 
-        $input = $request->only(['name', 'filier_id']); //Retreive the name and the abr fields
+        $acc_year->fill($input)->save();
 
-        $spesialite->fill($input)->save();
-
-        return redirect()->route('year_acc.index')
+        return redirect()->route('annee_acc.index')
             ->with('flash_message',
-                'filier '. $spesialite->name.' updated!');
+                'year updated!');
     }
 
     /**
@@ -136,7 +153,7 @@ class AccadimicYearController extends Controller
      * @param  \App\Spesialite  $spesialite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Spesialite $spesialite)
+    public function destroy(AccadimicYear $acc_year)
     {
         $spesialite->delete();
         return redirect()->route('year_acc.index')

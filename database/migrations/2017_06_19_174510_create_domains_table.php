@@ -16,6 +16,7 @@ class CreateDomainsTable extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->boolean('common');
             $table->string('code');
             $table->timestamps();
         });

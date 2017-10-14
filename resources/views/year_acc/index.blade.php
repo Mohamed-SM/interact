@@ -45,12 +45,16 @@
                         @else
                             Master
                         @endif
-
+                        {{ $acc_year->study_year."/".($acc_year->study_year+1) }}
                     </td>
                     <td>{{ $acc_year->study_year."/".($acc_year->study_year+1) }}</td>
                     <td>{{ $acc_year->domain->name }}</td>
                     <td>{{ $acc_year->filier->name }}</td>
-                    <td>{{ $acc_year->spesialite->name }}</td>
+                    <td>
+                    @if($acc_year->filier->id)
+                    {{ $acc_year->spesialite->name }}
+                    @endif
+                    </td>
                     <td>{{ $acc_year->departement->title }}</td>
                     <td>
                       <a href="{{ URL::to('annee_acc/'.$acc_year->id.'/edit') }}" class="btn btn-info">

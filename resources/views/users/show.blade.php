@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '| Messages')
+@section('title', '| User')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,11 +9,6 @@
       <h1>
         User Profile
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">User profile</li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -27,9 +22,10 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/user2-160x160.jpg') }}" alt="User profile picture">
 
-              <h3 class="profile-username text-center">Nina Mcintire</h3>
+              <h3 class="profile-username text-center">{{ $user->name." ".$user->last_name }}</h3>
 
-              <p class="text-muted text-center">Software Engineer</p>
+              <p class="text-muted text-center">3 eme Informatique</p>
+              <p class="text-muted text-center">SI</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
@@ -96,7 +92,9 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
               <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+              @if(Auth::user()->id == $user->id )
               <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              @endif
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
@@ -309,60 +307,66 @@
                 </ul>
               </div>
               <!-- /.tab-pane -->
-
+              @if(Auth::user()->id == $user->id )
               <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT' , 'class' => 'form-horizontal')) }}
 
+                  
+                  <div class="form-group">
+                    {{ Form::label('name', 'nom' , array('class' => 'col-sm-2 control-label')) }}
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      {{ Form::text('name', null, array('class' => 'form-control')) }}
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
+                  <div class="form-group">
+                    {{ Form::label('last_name', 'prenom' , array('class' => 'col-sm-2 control-label')) }}
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      {{ Form::text('last_name', null, array('class' => 'form-control')) }}
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
 
+                  <div class="form-group">
+                    {{ Form::label('email', 'Email' , array('class' => 'col-sm-2 control-label')) }}
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                      {{ Form::email('email', null, array('class' => 'form-control')) }}
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Attacher Rôles</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <ul style="list-style-type: none;">
+                        @foreach ($roles as $role)
+                          <li>
+                          {{ Form::checkbox('roles[]',  $role->id ) }}
+                          {{ $role->name }}
+                          </li>
+                        @endforeach
+                      </ul>
                     </div>
                   </div>
+                  
+                  <p class="col-sm-offset-2 text-light-blue"><em class="fa fa-info-circle"></em> Vous pouvez lessez les champs de mot de pass vide pour ne pas modifier</p>
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                    {{ Form::label('password', 'Mot de pass' , array('class' => 'col-sm-2 control-label')) }}
+                    <div class="col-sm-10">
+                      {{ Form::password('password', array('class' => 'form-control')) }}
+                    </div>
+                  </div>
 
+                  <div class="form-group">
+                    {{ Form::label('password', 'Confirmier' , array('class' => 'col-sm-2 control-label')) }}
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                      {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
                     </div>
                   </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </div>
-                </form>
+
+                  {{ Form::submit('Enrigistre', array('class' => 'btn col-sm-offset-2 btn-primary')) }}
+                <!-- /.box-footer -->
+              {{ Form::close() }}
               </div>
+              @endif
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

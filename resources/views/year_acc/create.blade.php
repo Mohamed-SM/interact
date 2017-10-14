@@ -52,7 +52,8 @@
           {{ Form::label('filier_id', 'Filier' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
             <select name="filier_id" id="filiers" class="form-control">
-              <option selected="selected" disabled="disabled" hidden="hidden" value="">Filier ...</option>
+              <option selected="selected" disabled="disabled" hidden="hidden" value="0">Filier ...
+              </option>
             </select>
           </div>
         </div>
@@ -61,7 +62,7 @@
             {{ Form::label('spesialite_id', 'Spesialité' , array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
                 <select name="spesialite_id" id="spesialite" class="form-control">
-                    <option selected="selected" disabled="disabled" hidden="hidden" value="">Spesialites ...</option>
+                    <option selected="selected" disabled="disabled" hidden="hidden" value="0">Spesialites ...</option>
                 </select>
             </div>
         </div>

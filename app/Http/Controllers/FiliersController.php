@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Filier;
 use App\Domain;
+use App\Spesialite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -138,6 +139,11 @@ class FiliersController extends Controller
 
         try {
             $filier = Filier::findOrFail($id);
+            if($filier->common){
+                
+                $spesialite = Spesialite::all()->first();
+                $filier->spesialite->prepend($spesialite);
+            }
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The Domain with ID: ' . $id . ' was not found.');
             return;
