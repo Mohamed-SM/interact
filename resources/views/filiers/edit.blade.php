@@ -36,6 +36,13 @@
             {{ Form::select('domain', $domains, null, ['placeholder' => 'Domain ...' , 'class' => 'form-control']) }}
           </div>
         </div>
+        
+        <div class="form-group">
+          {{ Form::label('code', 'Code' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('code', null, array('class' => 'form-control')) }}
+          </div>
+        </div>
       </div>
 
       

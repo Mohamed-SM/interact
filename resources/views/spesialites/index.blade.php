@@ -25,14 +25,32 @@
                   <th>spesialite</th>
                   <th>filier</th>
                   <th>domain</th>
+                  <th>Code</th>
                   <th>Operation</th>
                 </tr>
                 
                 @foreach ($spesialites as $spesialite)
+                @if($spesialite->id==0)
+                <tr>
+                    <td>{{ $spesialite->name }}</td>
+                    <td>/</td>
+                    <td>/</td>
+                    <td>SC</td>
+                    <td>
+                      <button type="button" class="btn btn-info disabled">
+                        <i class="fa fa-pencil-square-o"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger disabled">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                </tr>
+                @else
                 <tr>
                     <td>{{ $spesialite->name }}</td>
                     <td>{{ $spesialite->filier->name }}</td>
                     <td>{{ $spesialite->filier->domain->name }}</td>
+                    <td>{{ $spesialite->code }}</td>
                     <td>
                       <a href="{{ URL::to('spesialites/'.$spesialite->id.'/edit') }}" class="btn btn-info">
                         <i class="fa fa-pencil-square-o"></i>
@@ -45,6 +63,7 @@
 
                     </td>
                 </tr>
+                @endif
                 @endforeach
 
               </tbody></table>

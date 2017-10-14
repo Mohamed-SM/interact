@@ -37,6 +37,13 @@
           </div>
         </div>
 
+        <div class="form-group">
+          {{ Form::label('code', 'Code' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('code', '', array('class' => 'form-control')) }}
+          </div>
+        </div>
+
       </div>
       <!-- /.box-body -->
       <div class="box-footer">

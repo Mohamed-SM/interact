@@ -6,7 +6,8 @@ use App\Spesialite;
 use App\Filier;
 use App\Domain;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
+
 
 class SpesialiteController extends Controller
 {
@@ -49,13 +50,16 @@ class SpesialiteController extends Controller
         $this->validate($request, [
                 'name'=>'required|max:250',
                 'filier'=>'required',
+                'code'=>'required',
             ]
         );
 
         $name = $request['name'];
+        $code = $request['code'];
 
         $spesialite = new Spesialite();
         $spesialite->name = $name;
+        $spesialite->code = $code;
 
         $filier = Filier::findOrFail($request['filier']);
         $filier->spesialite()->save($spesialite);
@@ -100,11 +104,15 @@ class SpesialiteController extends Controller
         //Validate name and permissions field
         $this->validate($request, [
                 'name'=>'required|max:250',
-                'filier_id'=>'required',
+                'filier_id'=>[
+                    'required',
+                    Rule::notIn(['0']),
+                ],
+                'code'=>'required',
             ]
         );
 
-        $input = $request->only(['name', 'filier_id']); //Retreive the name and the abr fields
+        $input = $request->only(['name', 'filier_id' , 'code']); //Retreive the name and the abr fields
 
         $spesialite->fill($input)->save();
 

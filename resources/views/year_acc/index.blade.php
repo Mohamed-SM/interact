@@ -24,9 +24,6 @@
                 <tbody><tr>
                     <th>Annee Accadimique</th>
                     <th>Année scol</th>
-                    <th>domain</th>
-                    <th>filier</th>
-                    <th>spesialité</th>
                     <th>departement</th>
                     <th>Operation</th>
                 </tr>
@@ -45,16 +42,13 @@
                         @else
                             Master
                         @endif
-                        
+                        {{ $acc_year->domain->code }}
+                        {{ $acc_year->filier->code }}
+                        @if($acc_year->filier->id)
+                        {{ $acc_year->spesialite->code }}
+                        @endif    
                     </td>
                     <td>{{ $acc_year->study_year."/".($acc_year->study_year+1) }}</td>
-                    <td>{{ $acc_year->domain->name }}</td>
-                    <td>{{ $acc_year->filier->name }}</td>
-                    <td>
-                    @if($acc_year->filier->id)
-                    {{ $acc_year->spesialite->name }}
-                    @endif
-                    </td>
                     <td>{{ $acc_year->departement->title }}</td>
                     <td>
                       <a href="{{ URL::to('annee_acc/'.$acc_year->id.'/edit') }}" class="btn btn-info">

@@ -7,6 +7,7 @@ use App\Domain;
 use App\Filier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
 
 class DomainsController extends Controller
 {
@@ -150,7 +151,7 @@ class DomainsController extends Controller
 
     }
 
-    public function getFiliers(){
+    public function getFiliers(Request $request){
         $id = Input::get( 'domain' );
         
         try {

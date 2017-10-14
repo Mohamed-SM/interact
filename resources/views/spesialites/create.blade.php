@@ -46,6 +46,13 @@
           </div>
         </div>
 
+        <div class="form-group">
+          {{ Form::label('code', 'Code' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('code', '', array('class' => 'form-control')) }}
+          </div>
+        </div>
+
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
@@ -66,13 +73,15 @@
     console.log("louading ...");
     $.post("{{ route('getfiliers') }}",
             {
-              "_token": $('#create').find( 'input[name=_token]' ).val(),
-              "domain" : $('#domain').val(),
+              "_token"  :  $('#create').find( 'input[name=_token]' ).val(),
+              "domain"  :  $('#domain').val(),
+              "sp"      :  "yes",
             },
             function(data, status){
               console.log(data + status);
               if (data != '') {
                 $("#filiers").html(data);
+                $("#filiers").find('option:first').remove();
               }
             });
   });

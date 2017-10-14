@@ -30,4 +30,8 @@ class AccadimicYear extends Model
         return $this->belongsTo(Departement::class);
     }
 
+    public function semesters()
+    {
+        return $this->hasMany(Semester::class);
+    }
 }

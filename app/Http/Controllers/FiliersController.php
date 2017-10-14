@@ -53,13 +53,16 @@ class FiliersController extends Controller
         $this->validate($request, [
             'name'=>'required|max:250',
             'domain'=>'required',
+            'code'=>'required',
             ]
         );
 
         $name = $request['name'];
+        $code = $request['code'];
 
         $filier = new Filier();
         $filier->name = $name;
+        $filier->code = $code;
 
         $domain = Domain::findOrFail($request['domain']);
         $domain->filier()->save($filier);
@@ -107,10 +110,11 @@ class FiliersController extends Controller
         $this->validate($request, [
                 'name'=>'required|max:250',
                 'domain'=>'required',
+                'code'=>'required',
             ]
         );
 
-        $input = $request->only(['name', 'domain']); //Retreive the name and the abr fields
+        $input = $request->only(['name', 'domain' ,'code']); //Retreive the name and the abr fields
 
         $filier->fill($input)->save();
 

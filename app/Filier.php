@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Filier extends Model
 {
     protected $fillable = [
-        'name', 'domain_id',
+        'name', 'domain_id', 'code',
     ];
 
     public function domain()

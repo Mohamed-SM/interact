@@ -57,7 +57,20 @@
             <li><a href="{{ config('app.url') }}/domains"><span>Domains</span></a></li>
             <li><a href="{{ config('app.url') }}/filiers"><span>Filiers</span></a></li>
             <li><a href="{{ config('app.url') }}/spesialites"><span>Spesialites</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-sitemap fa-fw"></i><span>Gestion d'ensgnement</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
             <li><a href="{{ config('app.url') }}/annee_acc"><span>Accadimique year</span></a></li>
+            <li><a href="{{ config('app.url') }}/semesters"><span>Semesters</span></a></li>
+            <li><a href="{{ config('app.url') }}/modules"><span>Modules</span></a></li>
+            <li><a href="{{ config('app.url') }}/facultes"><span></span></a></li>
+            <li><a href="{{ config('app.url') }}/departements"><span></span></a></li>
           </ul>
         </li>
       </ul>

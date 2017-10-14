@@ -20,7 +20,7 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    {{ Form::model($spesialite, array('route' => array('spesialites.update', $spesialite->id), 'method' => 'PUT' , 'class' => 'form-horizontal')) }}
+    {{ Form::model($spesialite, array('route' => array('spesialites.update', $spesialite->id), 'method' => 'PUT' ,'id' => 'edit', 'class' => 'form-horizontal')) }}
 
         <div class="box-body">
         <div class="form-group">
@@ -40,7 +40,14 @@
         <div class="form-group">
           {{ Form::label('filier', 'Filier' , array('class' => 'col-sm-2 control-label')) }}
           <div class="col-sm-10">
-            {{ Form::select('filier_id', $spesialite->filier->domain->filier->pluck('name','id'), $spesialite->filier->id, ['id'=> 'filiers', 'placeholder' => 'filiers ...' , 'class' => 'form-control']) }}
+            {{ Form::select('filier_id', $spesialite->filier->domain->filier->pluck('name','id'), $spesialite->filier->id, ['id'=> 'filiers', 'class' => 'form-control']) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ Form::label('code', 'Code' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::text('code', null, array('class' => 'form-control')) }}
           </div>
         </div>
 
@@ -65,7 +72,7 @@
     console.log("louading ...");
     $.post("{{ route('getfiliers') }}",
             {
-              "_token": $('#create').find( 'input[name=_token]' ).val(),
+              "_token": $('#edit').find( 'input[name=_token]' ).val(),
               "domain" : $('#domain').val(),
             },
             function(data, status){

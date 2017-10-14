@@ -40,6 +40,8 @@ Route::resource('spesialites', 'SpesialiteController');
 
 Route::resource('annee_acc', 'AccadimicYearController');
 
+Route::resource('semesters', 'SemesterController');
+
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
     Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);

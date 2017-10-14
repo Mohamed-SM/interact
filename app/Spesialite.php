@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Spesialite extends Model
 {
     protected $fillable = [
-        'name', 'filier_id',
+        'name', 'filier_id', 'code'
     ];
 
     public function filier()

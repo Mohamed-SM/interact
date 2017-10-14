@@ -16,6 +16,7 @@ class CreateFiliersTable extends Migration
         Schema::create('filiers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('code');
             $table->integer('domain_id');
             $table->boolean('common');
             $table->timestamps();
