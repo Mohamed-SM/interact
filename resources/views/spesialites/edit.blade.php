@@ -79,6 +79,7 @@
               console.log(data + status);
               if (data != '') {
                 $("#filiers").html(data);
+                $("#filiers").find('option:first').remove();
               }
             });
   });
