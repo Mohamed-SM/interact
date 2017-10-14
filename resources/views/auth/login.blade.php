@@ -81,7 +81,7 @@
 
         <div class="social-auth-links text-center" data-toggle="social" data-placement="bottom" title="comming soon">
           <p>- OR -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat disabled"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
+          <a href="redirect" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
           <a href="#" class="btn btn-block btn-social btn-google btn-flat disabled"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
         </div>
         <!-- /.social-auth-links -->

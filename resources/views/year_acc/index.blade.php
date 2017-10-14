@@ -45,7 +45,7 @@
                         @else
                             Master
                         @endif
-                        {{ $acc_year->study_year."/".($acc_year->study_year+1) }}
+                        
                     </td>
                     <td>{{ $acc_year->study_year."/".($acc_year->study_year+1) }}</td>
                     <td>{{ $acc_year->domain->name }}</td>

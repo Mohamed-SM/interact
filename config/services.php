@@ -34,5 +34,16 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'twitter' => [
+        'client_id'     => env('MWjWkeRuN2vDcDb4UwWHSYcuw'),
+        'client_secret' => env('MVwaH6KDl546LYorDO09NHTDDnUumP3qdZDgETZUxiNQrqG03m'),
+        'redirect'      => env('callbackurl'),
+    ],
+    'facebook' => [
+        'client_id'     => '1446736222291786',
+        'client_secret' => 'd833a679851e15e5cd2e7186bb175c51',
+        'redirect'      => 'http://interact.com/callback',
+    ],
+
 
 ];
