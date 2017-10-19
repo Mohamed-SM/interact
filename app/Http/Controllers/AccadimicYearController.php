@@ -74,17 +74,16 @@ class AccadimicYearController extends Controller
                 'domain_id' => 'required',
                 'filier_id' => 'required',
                 'departement_id' => 'required',
-                'study_year' => 'required',
                 'spesialite_id' => 'required',
             ]);
         
-        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id' , 'study_year']);
+        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id']);
 
         $acc_year = new AccadimicYear();
 
         $acc_year->fill($input)->save();
         return redirect()->route('annee_acc.index')
-            ->with('flash_message','Année '. $acc_year->year.$acc_year->domaine().$acc_year->grade.' Ajoute!');
+            ->with('flash_message','Année '. $acc_year->year.$acc_year->domaine.$acc_year->grade.' Ajoute!');
     }
 
     /**
@@ -134,11 +133,10 @@ class AccadimicYearController extends Controller
                 'domain_id' => 'required',
                 'filier_id' => 'required',
                 'departement_id' => 'required',
-                'study_year' => 'required',
                 'spesialite_id' => 'required',
             ]);
         
-        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id' , 'study_year']);
+        $input = $request->only(['year', 'grade' , 'domain_id' , 'filier_id' , 'spesialite_id' , 'departement_id']);
 
         $acc_year->fill($input)->save();
 
@@ -153,10 +151,11 @@ class AccadimicYearController extends Controller
      * @param  \App\Spesialite  $spesialite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AccadimicYear $acc_year)
+    public function destroy($id)
     {
-        $spesialite->delete();
-        return redirect()->route('year_acc.index')
-            ->with('flash_message','spesialite supprimer!');
+        $acc_year = AccadimicYear::findOrFail($id);
+        $acc_year->delete();
+        return redirect()->route('annee_acc.index')
+            ->with('flash_message','Année Accadimic supprimer!');
     }
 }

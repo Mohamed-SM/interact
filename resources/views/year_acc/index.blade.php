@@ -23,7 +23,6 @@
               <table class="table table-bordered">
                 <tbody><tr>
                     <th>Annee Accadimique</th>
-                    <th>Année scol</th>
                     <th>departement</th>
                     <th>Operation</th>
                 </tr>
@@ -48,7 +47,6 @@
                         {{ $acc_year->spesialite->code }}
                         @endif    
                     </td>
-                    <td>{{ $acc_year->study_year."/".($acc_year->study_year+1) }}</td>
                     <td>{{ $acc_year->departement->title }}</td>
                     <td>
                       <a href="{{ URL::to('annee_acc/'.$acc_year->id.'/edit') }}" class="btn btn-info">

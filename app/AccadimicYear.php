@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AccadimicYear extends Model
 {
     protected $fillable = [
-        'year','grade','study_year','domain_id','filier_id', 'spesialite_id','departement_id',
+        'year','grade','domain_id','filier_id', 'spesialite_id','departement_id',
     ];
 
     public function domain()

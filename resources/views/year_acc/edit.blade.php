@@ -85,13 +85,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            {{ Form::label('study_year', 'Année scholair' , array('class' => 'col-sm-2 control-label')) }}
-            <div class="col-sm-10">
-                    {{ Form::number('study_year', null, array('class' => 'form-control' ,'min' => '2017' , 'max' => '2099')) }}
-            </div>
-        </div>
-
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
