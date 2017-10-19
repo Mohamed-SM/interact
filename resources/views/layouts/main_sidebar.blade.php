@@ -47,8 +47,8 @@
                 </span>
               </a>
               <ul class="treeview-menu" style="display: none;">
-                <li><a href="{{ config('app.url') }}/permissions"><span>Permissions</span></a></li>
                 <li><a href="{{ config('app.url') }}/roles"><span>Rôles</span></a></li>
+                <li><a href="{{ config('app.url') }}/permissions"><span>Permissions</span></a></li>
               </ul>
             </li>
             <li><a href="{{ config('app.url') }}/users"><span>Utilisateurs</span></a></li>
@@ -69,8 +69,8 @@
             <li><a href="{{ config('app.url') }}/annee_acc"><span>Accadimique year</span></a></li>
             <li><a href="{{ config('app.url') }}/semesters"><span>Semesters</span></a></li>
             <li><a href="{{ config('app.url') }}/modules"><span>Modules</span></a></li>
-            <li><a href="{{ config('app.url') }}/facultes"><span></span></a></li>
-            <li><a href="{{ config('app.url') }}/departements"><span></span></a></li>
+            <li><a href="{{ config('app.url') }}/grades"><span>Grades</span></a></li>
+            <li><a href="{{ config('app.url') }}/enseignants"><span>Enseignants</span></a></li>
           </ul>
         </li>
       </ul>

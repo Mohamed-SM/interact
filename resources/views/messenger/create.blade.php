@@ -78,12 +78,14 @@
                 },
                 nonSelectedText: 'Selectioner les paerticipants',
                 enableFiltering: true,
+                buttonWidth: '100%',
                 enableCaseInsensitiveFiltering: true,
                 filterPlaceholder: 'Search for something...',
                 numberDisplayed: 5,
                 maxHeight: 200,
                 buttonClass: 'btn btn-default btn-block btn-flat',
             });
+            $(".multiselect-container").css('width', '100%');
         });
     </script>
 
