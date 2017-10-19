@@ -69,6 +69,8 @@
             <li><a href="{{ config('app.url') }}/annee_acc"><span>Accadimique year</span></a></li>
             <li><a href="{{ config('app.url') }}/semesters"><span>Semesters</span></a></li>
             <li><a href="{{ config('app.url') }}/university_years"><span>University year</span></a></li>
+            <li><a href="{{ config('app.url') }}/unit_types"><span>Unit Types</span></a></li>
+            <li><a href="{{ config('app.url') }}/units"><span>Units</span></a></li>
             <li><a href="{{ config('app.url') }}/modules"><span>Modules</span></a></li>
             <li><a href="{{ config('app.url') }}/grades"><span>Grades</span></a></li>
             <li><a href="{{ config('app.url') }}/enseignants"><span>Enseignants</span></a></li>
