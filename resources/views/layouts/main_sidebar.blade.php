@@ -68,6 +68,7 @@
           <ul class="treeview-menu" style="display: none;">
             <li><a href="{{ config('app.url') }}/annee_acc"><span>Accadimique year</span></a></li>
             <li><a href="{{ config('app.url') }}/semesters"><span>Semesters</span></a></li>
+            <li><a href="{{ config('app.url') }}/university_years"><span>University year</span></a></li>
             <li><a href="{{ config('app.url') }}/modules"><span>Modules</span></a></li>
             <li><a href="{{ config('app.url') }}/grades"><span>Grades</span></a></li>
             <li><a href="{{ config('app.url') }}/enseignants"><span>Enseignants</span></a></li>
