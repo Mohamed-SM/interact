@@ -17,7 +17,6 @@ class CreateAccadimicYearsTable extends Migration
             $table->increments('id');
             $table->integer('year');
             $table->string('grade');
-            $table->integer('study_year');
             $table->integer('domain_id');
             $table->integer('filier_id');
             $table->integer('spesialite_id');
