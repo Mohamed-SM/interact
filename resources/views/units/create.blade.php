@@ -37,6 +37,13 @@
           </div>
         </div>
 
+        <div class="form-group">
+          {{ Form::label('canva_id', 'Canva' , array('class' => 'col-sm-2 control-label')) }}
+          <div class="col-sm-10">
+            {{ Form::select('canva_id', $canvas, null, ['placeholder' => 'Canvas ...' , 'class' => 'form-control']) }}
+          </div>
+        </div>
+
       </div>
       <!-- /.box-body -->
       <div class="box-footer">

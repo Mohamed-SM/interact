@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', '| Unités')
+@section('title', '| Canvas')
 
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      Gestion des unités       
+      Gestion des canvaés       
       </h1>
     </section>
 
@@ -15,31 +15,33 @@
     <section class="content">
     <div class="box">
             <div class="box-header with-border">
-              <a href="{{ URL::to('units/create') }}" class="btn btn-success btn-flat pull-right">Ajoute unit</a>
-              <h3 class="box-title">Tout les unités</h3>
+              <a href="{{ URL::to('canvas/create') }}" class="btn btn-success btn-flat pull-right">Ajoute canva</a>
+              <h3 class="box-title">Tout les canvaés</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
                 <tbody><tr>
-                  <th>code</th>
-                  <th>type</th>
-                  <th>canva</th>
+                  <th>semestre</th>
+                  <th>started at</th>
                   <th>Operation</th>
                 </tr>
                 
-                @foreach ($units as $unit)
+                @foreach ($canvas as $canva)
                 <tr>
-                    <td>{{ $unit->code }}</td>
-                    <td>{{ $unit->unit_type->title }}</td>
-                    <td>{{ $unit->canva->semester->code }}</td>
+                    <td>{{ $canva->semester->code }}</td>
+                    <td>{{ $canva->started_at }}</td>
                     <td>
-                      <a href="{{ URL::to('units/'.$unit->id.'/edit') }}" class="btn btn-info">
+                      <a href="{{ URL::to('canvas/'.$canva->id) }}" class="btn btn-info">
+                        <i class="fa  fa-search-plus"></i>
+                      </a>
+                      <a href="{{ URL::to('canvas/'.$canva->id.'/edit') }}" class="btn btn-info">
                         <i class="fa fa-pencil-square-o"></i>
                       </a>
+
                       
                       <button type="button" class="btn btn-danger" data-toggle="modal"
-                      data-target="#supp-modal{{ $unit->id }}">
+                      data-target="#supp-modal{{ $canva->id }}">
                         <i class="fa fa-trash"></i>
                       </button>
 
@@ -52,7 +54,7 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               <div class="text-center">
-                {{ $units->links() }}
+                {{ $canvas->links() }}
               </div>
             </div>
           </div>
@@ -60,8 +62,8 @@
     <!-- /.content -->
 </div>
 
-@foreach ($units as $unit)
-  <div class="modal fade modal-danger" id="supp-modal{{ $unit->id }}" role="dialog">
+@foreach ($canvas as $canva)
+  <div class="modal fade modal-danger" id="supp-modal{{ $canva->id }}" role="dialog">
     <div class="modal-dialog">
   
     <!-- Modal content-->
@@ -71,16 +73,15 @@
           <h4 class="modal-title">Confirmier la supprission</h4>
         </div>
         <div class="modal-body">
-          <p> <b>Id : </b> {{ $unit->id }}</p>
-          <p> <b>Nom de unit : </b> {{ $unit->code }}</p>
+          <p> <b>Id : </b> {{ $canva->id }}</p>
           
           <p> Othe Data to be add later ....</p>
           
 
-          <p> <b>Ajoute le  : </b> {{ $unit->created_at->format('F d, Y h:ia') }}</p>
+          <p> <b>Ajoute le  : </b> {{ $canva->created_at->format('F d, Y h:ia') }}</p>
         </div>
         <div class="modal-footer">
-        {!! Form::open(['method' => 'DELETE', 'route' => ['units.destroy', $unit->id]]) !!}
+        {!! Form::open(['method' => 'DELETE', 'route' => ['canvas.destroy', $canva->id]]) !!}
         <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
         {!! Form::submit('Delete', ['class' => 'btn btn-outline']) !!}
         {!! Form::close() !!}

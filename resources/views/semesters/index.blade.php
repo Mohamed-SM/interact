@@ -23,6 +23,7 @@
               <table class="table table-bordered">
                 <tbody><tr>
                   <th>semester</th>
+                  <th>code</th>
                   <th>année accadimic</th>
                   <th>Operation</th>
                 </tr>
@@ -30,12 +31,13 @@
                 @foreach ($semesters as $semester)
                 <tr>
                     <td>S{{ $semester->number }}</td>
+                    <td>{{ $semester->code }}</td>
                     <td>{{ $semester->year->grade.$semester->year->year.' '.$semester->year->domain->code }} 
                       {{ $semester->year->filier->code }}
                       @if($semester->year->filier->id != 0)
                       {{ $semester->year->spesialite->code }}
                       @endif
-                      ({{ $semester->year->study_year.'/'.($semester->year->study_year+1) }})</td>
+                      </td>
                     <td>
                       <a href="{{ URL::to('semesters/'.$semester->id.'/edit') }}" class="btn btn-info">
                         <i class="fa fa-pencil-square-o"></i>

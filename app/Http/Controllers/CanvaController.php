@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Unit;
-use App\UnitType;
 use App\Canva;
+use App\Unit;
+use App\Semester;
 use Illuminate\Http\Request;
 
-class UnitController extends Controller
+class CanvaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +25,8 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units = Unit::paginate(15);//Get all roles
-        return view('units.index')->with('units', $units);
+        $canvas = Canva::paginate(15);//Get all roles
+        return view('canvas.index')->with('canvas', $canvas);
     }
 
     /**
@@ -36,13 +36,9 @@ class UnitController extends Controller
      */
     public function create()
     {
-        $types = UnitType::all()->pluck('title','id');
-        $canvas = Canva::all();
-        foreach($canvas as $canva){
-            $canva->name = $canva->semester->code;
-        }
-        $canvas = $canvas->pluck('name','id');
-        return view('units.create',compact('types','canvas'));
+        $semesters = Semester::all()->pluck('code','id') ;
+
+        return view('canvas.create',compact('semesters'));
     }
 
     /**
@@ -55,23 +51,20 @@ class UnitController extends Controller
     {
         //Validate name and permissions field
         $this->validate($request, [
-            'code'=>'required|max:250',
-            'type'=>'required',
-            'canva_id'=>'required',
+            'semester_id'=>'required',
+            'started_at'=>'required',
             ]
         );
 
-        $canva_id = $request['canva_id'];
-        $canva = Canva::findOrFail($canva_id);
+        $semester = Semester::findOrFail($request['semester_id']);
         
-        $unit = new Unit();
-        $unit->code = $request['code'];
-        $unit->unit_type_id = $request['type'];
+        $canva = new Canva();
+        $canva->started_at = $request['started_at'];
+        
+        $semester->canvas()->save($canva);
 
-        $canva->units()->save($unit);
-
-        return redirect()->route('units.index')
-            ->with('flash_message','Unit '. $unit->code.' Ajoute!'); 
+        return redirect()->route('canvas.index')
+            ->with('flash_message','Canva '. $canva->semester->id.' Ajoute!'); 
     }
 
     /**
@@ -82,7 +75,9 @@ class UnitController extends Controller
      */
     public function show($id)
     {
-        return redirect('units');
+        $canva = Canva::findOrFail($id);
+
+        return view('canvas.show', compact('canva'));
     }
 
     /**
@@ -93,14 +88,10 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        $types = UnitType::all()->pluck('title','id') ;
-        $unit = Unit::findOrFail($id);
-        $canvas = Canva::all();
-        foreach($canvas as $canva){
-            $canva->name = $canva->semester->code;
-        }
-        $canvas = $canvas->pluck('name','id');
-        return view('units.edit', compact('unit','types','canvas'));
+        $semesters = Semester::all()->pluck('code','id') ;
+        $canva = Canva::findOrFail($id);
+
+        return view('canvas.edit', compact('canva','semesters'));
     }
 
     /**
@@ -112,23 +103,22 @@ class UnitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $unit = Unit::findOrFail($id);//Get role with the given id
+        $canva = Canva::findOrFail($id);//Get role with the given id
 
         //Validate name and permissions field
         $this->validate($request, [
-            'code'=>'required|max:250',
-            'unit_type_id'=>'required',
-            'canva_id'=>'required',
+            'semester_id'=>'required',
+            'started_at'=>'required',
             ]
         );
 
-        $input = $request->only(['code', 'unit_type_id','canva_id']); //Retreive the title and the abr fields
+        $input = $request->only(['semester_id','started_at',]); //Retreive the code and the abr fields
+        
+        $canva->fill($input)->save();
 
-        $unit->fill($input)->save();
-
-        return redirect()->route('units.index')
+        return redirect()->route('canvas.index')
             ->with('flash_message',
-             'Unit '. $unit->code.' updated!');
+             'Canva '. $canva->code.' updated!');
     }
 
     /**
@@ -139,13 +129,13 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        $unit = Unit::findOrFail($id);
+        $canva = Canva::findOrFail($id);
 
         
-        $unit->delete();
+        $canva->delete();
 
-        return redirect()->route('units.index')
-            ->with('flash_message','Unit supprimer!');
+        return redirect()->route('canvas.index')
+            ->with('flash_message','Canva supprimer!');
 
     }
 }

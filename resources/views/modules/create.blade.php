@@ -22,7 +22,7 @@
     <!-- form start -->
     {{ Form::open(array('url' => 'modules' , 'class' => 'form-horizontal')) }}
 
-        <div class="box-body">
+      <div class="box-body">
 
         <div class="form-group">
           {{ Form::label('title', 'Titre' , array('class' => 'col-sm-2 control-label')) }}
@@ -93,7 +93,6 @@
             {{ Form::checkbox('controle','true', true) }}
           </div>
         </div>
-
       </div>
       <!-- /.box-body -->
       <div class="box-footer">

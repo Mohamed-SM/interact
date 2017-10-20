@@ -31,7 +31,7 @@ class SemesterController extends Controller
     {
         $years = AccadimicYear::all();
         foreach($years as $year){
-            $year->name = $year->grade.$year->year.' '.$year->domain->name.' '.$year->filier->name.' ('.$year->study_year.'/'.($year->study_year+1).')';
+            $year->name = $year->grade.$year->year.' '.$year->domain->name.' '.$year->filier->name.' '.$year->spesialite->name;
         }
         $years = $years->pluck('name','id');
         return view('semesters.create',compact('years'));
@@ -58,7 +58,7 @@ class SemesterController extends Controller
         $semester->number = $request['number'];
 
         $year = AccadimicYear::findOrFail($request['year']);
-        $semester->code = 'S'.$semester->number.$year->grade.$year->year.$year->study_year;
+        $semester->code = 'S'.$semester->number.'_'.$year->grade.$year->year.'_'.$year->domain->code.'_'.$year->filier->code.'_'.$year->spesialite->code;
         $year->semesters()->save($semester);
 
 
@@ -87,7 +87,7 @@ class SemesterController extends Controller
     {
         $years = AccadimicYear::all();
         foreach($years as $year){
-            $year->name = $year->grade.$year->year.' '.$year->domain->name.' '.$year->filier->name.' ('.$year->study_year.'/'.($year->study_year+1).')';
+            $year->name = $year->grade.$year->year.' '.$year->domain->name.' '.$year->filier->name.$year->spesialite->name;
         }
         $years = $years->pluck('name','id');
         return view('semesters.edit', compact('semester','years'));
@@ -112,7 +112,7 @@ class SemesterController extends Controller
         $semester->number = $request['number'];
 
         $year = AccadimicYear::findOrFail($request['year']);
-        $semester->code = 'S'.$semester->number.$year->grade.$year->year.$year->study_year;
+        $semester->code = 'S'.$semester->number.'_'.$year->grade.$year->year.'_'.$year->domain->code.'_'.$year->filier->code.'_'.$year->spesialite->code;
         $year->semesters()->save($semester);
 
 

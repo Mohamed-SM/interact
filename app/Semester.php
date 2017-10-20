@@ -10,4 +10,9 @@ class Semester extends Model
     {
         return $this->belongsTo('App\AccadimicYear','accadimic_year_id');
     }
+
+    public function canvas()
+    {
+        return $this->hasMany(Canva::class);
+    }
 }
