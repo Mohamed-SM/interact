@@ -52,6 +52,8 @@ Route::resource('unit_types', 'UnitTypeController');
 
 Route::resource('units', 'UnitController');
 
+Route::resource('modules', 'ModuleController');
+
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
     Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);

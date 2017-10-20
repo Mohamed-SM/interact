@@ -14,4 +14,8 @@ class Unit extends Model
     {
         return $this->belongsTo(UnitType::class);
     }
+
+    public function modules(){
+        return $this->hasMany(Module::class);
+    }
 }
