@@ -37,7 +37,7 @@ class EnseignantController extends Controller
     public function create()
     {
         $grades = Grade::all()->pluck('title','id');
-        $users = User::all();
+        $users = User::whereNotIn('id', Enseignant::get()->pluck('user_id'))->get();
         return view('enseignants.create',compact('grades','users'));
     }
 

@@ -16,7 +16,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Modifer Enseignant: {{$enseignant->name.' '.$enseignant->last_name}}
+      Modifer Enseignant: {{$enseignant->user->name.' '.$enseignant->user->last_name}}
     </h1>
   </section>
 

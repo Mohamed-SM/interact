@@ -56,6 +56,10 @@ Route::resource('modules', 'ModuleController');
 
 Route::resource('canvas', 'CanvaController');
 
+Route::resource('promos', 'PromoController');
+
+Route::resource('students', 'StudentController');
+
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
     Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);

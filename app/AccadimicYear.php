@@ -34,4 +34,9 @@ class AccadimicYear extends Model
     {
         return $this->hasMany(Semester::class);
     }
+
+    public function promos()
+    {
+        return $this->hasMany(Promo::class);
+    }
 }

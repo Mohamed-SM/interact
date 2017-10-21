@@ -77,6 +77,17 @@
             <li><a href="{{ config('app.url') }}/enseignants"><span>Enseignants</span></a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-sitemap fa-fw"></i><span>Gestion d'etudients</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+            <li><a href="{{ config('app.url') }}/promos"><span>Promos</span></a></li>
+            <li><a href="{{ config('app.url') }}/students"><span>Students</span></a></li>
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
