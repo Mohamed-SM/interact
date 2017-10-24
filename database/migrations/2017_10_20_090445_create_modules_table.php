@@ -17,7 +17,7 @@ class CreateModulesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('code');
-            $table->integer('unit_id');
+            $table->integer('group_moduls_id');
             $table->integer('credits');
             $table->integer('coefficient');
             $table->integer('time_course')->unsigned()->nullable();

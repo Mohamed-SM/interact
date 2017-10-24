@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $module->title }}</td>
                     <td>{{ $module->code }}</td>
-                    <td>{{ $module->unit->code.' ('.$module->unit->unit_type->title.')' }}</td>
+                    <td>{{ $module->group_modul->unit->code.' ('.$module->group_modul->unit->unit_type->title.')' }}</td>
                     <td>
                       <a href="{{ URL::to('modules/'.$module->id.'/edit') }}" class="btn btn-info">
                         <i class="fa fa-pencil-square-o"></i>

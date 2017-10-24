@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Module;
 use App\Unit;
+use App\Group_Modul;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -75,7 +76,11 @@ class ModuleController extends Controller
         if(isset($request['controle'])) $module->controle = 1;
         else $module->controle = 0;
 
-        $unit->modules()->save($module);
+        $group_modul = new Group_Modul();
+
+        $unit->group_moduls()->save($group_modul);
+
+        $group_modul->modules()->save($module);
 
         return redirect()->route('modules.index')
             ->with('flash_message','Module '. $module->title.' Ajoute!'); 
