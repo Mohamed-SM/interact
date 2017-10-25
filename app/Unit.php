@@ -20,7 +20,7 @@ class Unit extends Model
         return $this->belongsTo(Canva::class);
     }
 
-    public function group_models(){
+    public function group_moduls(){
         return $this->hasMany(Group_Modul::class);
     }
 }

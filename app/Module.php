@@ -15,6 +15,6 @@ class Module extends Model
 
     public function group_modul()
     {
-        return $this->belongsTo(Group_Modul::class);
+        return $this->belongsTo(Group_Modul::class,'group_modul_id');
     }
 }

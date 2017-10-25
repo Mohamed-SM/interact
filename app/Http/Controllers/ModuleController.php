@@ -37,8 +37,12 @@ class ModuleController extends Controller
     public function create()
     {
         $units = Unit::all()->pluck('code','id') ;
-
-        return view('modules.create',compact('units'));
+        $modules = Module::all();
+        foreach($modules as $module){
+            $module->name = $module->title.' ('.$module->code.')';
+        }
+        $modules = $modules->pluck('name','id');
+        return view('modules.create',compact('units','modules'));
     }
 
     /**
@@ -49,38 +53,60 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
+        
         //Validate name and permissions field
         $this->validate($request, [
             'title'=>'required|max:250',
             'code'=>'required|max:10',
-            'unit'=>'required',
-            'credits'=>'required',
-            'coefficient'=>'required',
             ]
         );
-
-        $unit = Unit::findOrFail($request['unit']);
         
         $module = new Module();
         $module->title = $request['title'];
         $module->code = $request['code'];
-        $module->credits = $request['credits'];
-        $module->coefficient = $request['coefficient'];
-        $module->time_course = $request['time_course'];
-        $module->time_td = $request['time_td'];
-        $module->time_tp = $request['time_tp'];
-        
-        if(isset($request['exame'])) $module->exame = 1;
-        else $module->exame = 0;
-        
-        if(isset($request['controle'])) $module->controle = 1;
-        else $module->controle = 0;
+        if (isset($request['multichoise'])) {
+            
+            $modulchois = Module::findOrFail($request['module']);
+            
+            $module->credits = $modulchois->credits;
+            $module->coefficient = $modulchois->coefficient;
+            $module->time_course = $modulchois->time_course;
+            $module->time_td = $modulchois->time_td;
+            $module->time_tp = $modulchois->time_tp;    
+            $module->exame = $modulchois->exame;
+            $module->controle = $modulchois->controle;
 
-        $group_modul = new Group_Modul();
+            $modulchois->group_modul->modules()->save($module);
 
-        $unit->group_moduls()->save($group_modul);
+        }else{
 
-        $group_modul->modules()->save($module);
+            $this->validate($request, [
+                'unit'=>'required',
+                'credits'=>'required',
+                'coefficient'=>'required',
+                ]
+            );
+
+            $unit = Unit::findOrFail($request['unit']);
+
+            $module->credits = $request['credits'];
+            $module->coefficient = $request['coefficient'];
+            $module->time_course = $request['time_course'];
+            $module->time_td = $request['time_td'];
+            $module->time_tp = $request['time_tp'];
+
+            if(isset($request['exame'])) $module->exame = 1;
+            else $module->exame = 0;
+            
+            if(isset($request['controle'])) $module->controle = 1;
+            else $module->controle = 0;
+
+            $group_modul = new Group_Modul();
+
+            $unit->group_moduls()->save($group_modul);
+
+            $group_modul->modules()->save($module);
+        }
 
         return redirect()->route('modules.index')
             ->with('flash_message','Module '. $module->title.' Ajoute!'); 
@@ -108,7 +134,13 @@ class ModuleController extends Controller
         $units = Unit::all()->pluck('code','id') ;
         $module = Module::findOrFail($id);
 
-        return view('modules.edit', compact('module','units'));
+        $modules = Module::all();
+        foreach($modules as $m){
+            $m->name = $m->title.' ('.$m->code.')';
+        }
+        $modules = $modules->pluck('name','id');
+        
+        return view('modules.edit', compact('module','modules','units'));
     }
 
     /**
@@ -120,6 +152,7 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /*
         $module = Module::findOrFail($id);//Get role with the given id
 
         //Validate name and permissions field
@@ -133,7 +166,7 @@ class ModuleController extends Controller
         );
 
         $input = $request->only([
-            'title','code', 'unit_id',
+            'title','code', 'group_modul_id',
             'credits','coefficient',
             'time_course','time_td','time_tp',
         ]); //Retreive the code and the abr fields
@@ -143,8 +176,18 @@ class ModuleController extends Controller
         
         if(isset($request['controle'])) $module->controle = 1;
         else $module->controle = 0;
-        
-        $module->fill($input)->save();
+        */
+        echo "TODO not don yet i need to<br>
+        - check if the group_modul is modified<br>
+        - update the group_modu<br>
+        - update the model<br>
+        - update the unitid<br>
+        - if removed from group_modul create new one<br>
+        - if put in group_modul remove the empty one<br>
+        - and dear futur me think about other stuff to do here bsc i can't
+        ";
+        dd();
+        //$module->fill($input)->save();
 
         return redirect()->route('modules.index')
             ->with('flash_message',
