@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Promo;
-use App\AccadimicYear;
-use App\UniversityYear;
+use App\Section;
+use App\Group;
 use Illuminate\Http\Request;
 
 class PromoController extends Controller
@@ -25,7 +25,7 @@ class PromoController extends Controller
      */
     public function index()
     {
-        $promos = Promo::paginate(15);//Get all roles
+        $promos = Promo::paginate(15);
         return view('promos.index')->with('promos', $promos);
     }
 
@@ -82,7 +82,8 @@ class PromoController extends Controller
      */
     public function show($id)
     {
-        return redirect('promos');
+        $promo = Promo::findOrFail($id);
+        return view('promos.show')->with('promo', $promo);
     }
 
     /**
@@ -151,5 +152,34 @@ class PromoController extends Controller
         return redirect()->route('promos.index')
             ->with('flash_message','Promo supprimer!');
 
+    }
+
+    public function addsection(Request $request, $id)
+    {
+        $code = 
+        ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        $promo = Promo::findOrFail($id);//Get role with the given id
+
+        //Validate name and permissions field
+        $this->validate($request, [
+            'sections'=>'required',
+            'groups'=>'required',
+            ]
+        );
+        for ($i=0; $i < $request['sections']; $i++) { 
+            $section = new Section();
+            $section->code = $code[$i];
+            $promo->sections()->save($section);
+
+            for ($j=0; $j < $request['groups']; $j++) { 
+                $group = new Group();
+                $group->code = $j;
+                $section->groups()->save($group);
+            }
+        }
+        /***
+        *
+        */
+        return redirect('promos')->with('flash_message','Section et groups Ajoutées');
     }
 }

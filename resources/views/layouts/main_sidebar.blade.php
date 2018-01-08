@@ -85,6 +85,8 @@
           </a>
           <ul class="treeview-menu" style="display: none;">
             <li><a href="{{ config('app.url') }}/promos"><span>Promos</span></a></li>
+            <li><a href="{{ config('app.url') }}/sections"><span>Sections</span></a></li>
+            <li><a href="{{ config('app.url') }}/groups"><span>Groups</span></a></li>
             <li><a href="{{ config('app.url') }}/students"><span>Students</span></a></li>
           </ul>
         </li>

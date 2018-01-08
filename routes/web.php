@@ -58,6 +58,12 @@ Route::resource('canvas', 'CanvaController');
 
 Route::resource('promos', 'PromoController');
 
+Route::resource('sections', 'SectionController');
+
+Route::resource('groups', 'GroupController');
+
+Route::post('promos/addsection/{id}', ['as' => 'promos.addsection', 'uses' => 'PromoController@addsection']);
+
 Route::resource('students', 'StudentController');
 
 Route::group(['prefix' => 'messages'], function () {

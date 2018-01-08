@@ -22,4 +22,9 @@ class Promo extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
 }
